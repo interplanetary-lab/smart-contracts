@@ -133,6 +133,23 @@ function setupRound(
 }
 ```
 
+**Signature provider for private mint**
+
+In a private mint, the signature of the validator address must be generated like this: 
+
+```javascript
+let message = web3.utils.soliditySha3(
+    web3.utils.encodePacked(
+        user_address, // The address who want to mint
+        payloadExpiration, // The maximum timestamp before the signature is considered invalid
+        roundId, // The mint round index
+        maxMint, // The maximum token that the user is allowed to mint in the round 
+        smartContractAddress, // The address of the smart contract (to maximize security)
+        smartContractChainId, // The chainId of the smart contract (to maximize security)
+    )
+);
+return web3.eth.accounts.sign(message, validator_private_key).signature;
+```
 
 **Example**
 
