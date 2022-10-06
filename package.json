@@ -1,16 +1,31 @@
 {
-  "engine": {
-    "node": "16"
+  "name": "@interplanetary-lab/smart-contracts",
+  "description": "Useful toolbox for Interplanetary lab's smart contracts.",
+  "version": "0.0.0-development",
+  "homepage": "https://github.com/interplanetary-lab/smart-contracts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/interplanetary-lab/smart-contracts"
+  },
+  "release": {
+    "branches": [
+      "main"
+    ]
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "build": "npx truffle compile",
     "generate-docs": "npx solidity-docgen --solc-module solc-0.8 -t ./docs-templates",
-    "generate-types": "typechain --target=ethers-v5 build/contracts/*.json"
+    "generate-types": "typechain --target=ethers-v5 build/contracts/*.json",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@openzeppelin/truffle-upgrades": "^1.16.0",
     "cli-progress": "^3.11.2",
     "ganache-cli": "^6.12.2",
+    "semantic-release": "^19.0.5",
     "solc-0.8": "npm:solc@^0.8.17",
     "solidity-docgen": "^0.5.17"
   },
