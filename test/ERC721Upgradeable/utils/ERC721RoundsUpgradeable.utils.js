@@ -5,63 +5,9 @@ function getBN(value) {
 }
 
 /**
- * Get a signed data from the `signerPrivateKey` corresponding wallet
- *
- * @param data Array of data to sign
- * @param signerPrivateKey The private key of the signer
- * @returns
- */
-function getSignature(data, signerPrivateKey) {
-  let message = web3.utils.soliditySha3(web3.utils.encodePacked(...data));
-  return web3.eth.accounts.sign(message, signerPrivateKey).signature;
-}
-
-/**
- * Generate the signature of a round's validator
- *
- * @param userAddress The address who want to mint
- * @param payloadExpiration The maximum timestamp before the signature is considered invalid
- * @param roundId The mint round index
- * @param maxMint The maximum token that the user is allowed to mint in the round
- * @param smartContractAddress The address of the smart contract (to maximize security)
- * @param smartContractChainId The chainId of the smart contract (to maximize security)
- * @param validatorPrivateKey The private key of the validator
- * @returns
- */
-function getValidatorSignature(
-  userAddress,
-  payloadExpiration,
-  roundId,
-  maxMint,
-  smartContractAddress,
-  smartContractChainId,
-  validatorPrivateKey
-) {
-  return getSignature(
-    [
-      userAddress,
-      payloadExpiration,
-      roundId,
-      maxMint,
-      smartContractAddress,
-      smartContractChainId,
-    ],
-    validatorPrivateKey
-  );
-}
-
-/**
  * Test data after send a transaction for setup a round
- *
- * @param instance Instance of the smart contract
- * @param roundId
- * @param supply
- * @param startTime
- * @param duration
- * @param validator
- * @param price
  */
-const setupRoundTests = async (
+const afterSetupRoundTests = async (
   instance,
   roundId,
   supply,
@@ -78,7 +24,6 @@ const setupRoundTests = async (
     startTime.toString(),
     "Bad startTime"
   );
-  assert.equal(round.id.toString(), roundId.toString(), "Bad Id");
   assert.equal(round.duration.toString(), duration.toString(), "Bad duration");
   assert.equal(
     round.validator.toString(),
@@ -91,15 +36,8 @@ const setupRoundTests = async (
 
 /**
  * Test data after send a transaction for mint in a round
- *
- * @param tx The transaction send to mint
- * @param instance Instance of the smart contract
- * @param user
- * @param roundId
- * @param amount
- * @param maxMint
  */
-const roundMintTests = async (
+const afterRoundMintTests = async (
   tx,
   instance,
   user,
@@ -170,7 +108,7 @@ const roundMintTests = async (
 /**
  * Return the array of transferred tokens from transaction data
  *
- * @param txData
+ * @param {*} txData
  * @returns
  */
 const getTokensFromTransferEvent = (txData) => {
@@ -185,9 +123,7 @@ const getTokensFromTransferEvent = (txData) => {
 };
 
 module.exports = {
-  getSignature,
-  getValidatorSignature,
-  setupRoundTests,
-  roundMintTests,
+  afterSetupRoundTests,
+  afterRoundMintTests,
   getTokensFromTransferEvent,
 };

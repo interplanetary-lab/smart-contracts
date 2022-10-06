@@ -23,7 +23,7 @@
     - [Installation](#installation)
     - [Usage](#usage)
   - [Smart contracts](#smart-contracts-1)
-    - [ERC721RoundsManagementUpgradeable](#erc721roundsmanagementupgradeable)
+    - [ERC721RoundsUpgradeable](#ERC721RoundsUpgradeable)
 
 
 ## Overview
@@ -51,8 +51,8 @@ contract MyContract is ..... {
 
 ## Smart contracts
 
-### ERC721RoundsManagementUpgradeable
-[View documentation](./docs/ERC721Upgradeable/ERC721RoundsManagementUpgradeable.md)
+### ERC721RoundsUpgradeable
+[View documentation](./docs/ERC721Upgradeable/ERC721RoundsUpgradeable.md)
 
 **Overview**
 
@@ -153,4 +153,4 @@ return web3.eth.accounts.sign(message, validator_private_key).signature;
 
 **Example**
 
-For a complete example, see [DummyERC721RoundsManagementUpgradeable](./contracts/ERC721Upgradeable/exemples/DummyERC721RoundsManagementUpgradeable.sol) smart contract.
+For a complete example, see [DummyERC721RoundsUpgradeable](./contracts/ERC721Upgradeable/exemples/DummyERC721RoundsUpgradeable.sol) smart contract.
