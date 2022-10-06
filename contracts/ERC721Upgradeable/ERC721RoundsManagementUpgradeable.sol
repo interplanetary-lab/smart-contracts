@@ -194,7 +194,7 @@ contract ERC721RoundsManagementUpgradeable is ERC721Upgradeable {
         address validator,
         uint256 price
     ) internal virtual {
-        require(roundId > 0 && roundId < roundsLength, "Invalid roundId");
+        require(roundId > 0 && roundId <= roundsLength + 1, "Invalid roundId");
 
         // Create a new round
         if (roundId == roundsLength + 1) {
