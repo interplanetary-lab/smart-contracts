@@ -1,9 +1,9 @@
-# `DummyERC721RoundsManagementUpgradeable`
-**Documentation of `ERC721Upgradeable/exemples/DummyERC721RoundsManagementUpgradeable.sol`.**
+# `DummyERC721RoundsUpgradeable`
+**Documentation of `ERC721Upgradeable/exemples/DummyERC721RoundsUpgradeable.sol`.**
 
 
 
-Dummy contract test the management of mint rounds with {ERC721RoundsManagementUpgradeable}
+Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
 
 
 ## TABLE OF CONTENTS
@@ -12,26 +12,26 @@ Dummy contract test the management of mint rounds with {ERC721RoundsManagementUp
     - [`AdminChanged`](#ERC1967UpgradeUpgradeable-AdminChanged-address-address-) (inherited)
     - [`BeaconUpgraded`](#ERC1967UpgradeUpgradeable-BeaconUpgraded-address-) (inherited)
     - [`OwnershipTransferred`](#OwnableUpgradeable-OwnershipTransferred-address-address-) (inherited)
-    - [`RoundSetup`](#ERC721RoundsManagementUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-) (inherited)
+    - [`RoundSetup`](#ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-) (inherited)
     - [`Transfer`](#IERC721Upgradeable-Transfer-address-address-uint256-) (inherited)
     - [`Approval`](#IERC721Upgradeable-Approval-address-address-uint256-) (inherited)
     - [`ApprovalForAll`](#IERC721Upgradeable-ApprovalForAll-address-address-bool-) (inherited)
     - [`Initialized`](#Initializable-Initialized-uint8-) (inherited)
 
 - [Public Functions](#public-functions)
-    - [`constructor`](#DummyERC721RoundsManagementUpgradeable-constructor--) 
-    - [`initialize`](#DummyERC721RoundsManagementUpgradeable-initialize--) 
-    - [`mint`](#DummyERC721RoundsManagementUpgradeable-mint-uint256-uint256-) 
-    - [`privateMint`](#DummyERC721RoundsManagementUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-) 
-    - [`setupRound`](#DummyERC721RoundsManagementUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-) 
+    - [`constructor`](#DummyERC721RoundsUpgradeable-constructor--) 
+    - [`initialize`](#DummyERC721RoundsUpgradeable-initialize--) 
+    - [`mint`](#DummyERC721RoundsUpgradeable-mint-uint256-uint256-) 
+    - [`privateMint`](#DummyERC721RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-) 
+    - [`setupRound`](#DummyERC721RoundsUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-) 
     - [`proxiableUUID`](#UUPSUpgradeable-proxiableUUID--) (inherited)
     - [`upgradeTo`](#UUPSUpgradeable-upgradeTo-address-) (inherited)
     - [`upgradeToAndCall`](#UUPSUpgradeable-upgradeToAndCall-address-bytes-) (inherited)
     - [`owner`](#OwnableUpgradeable-owner--) (inherited)
     - [`renounceOwnership`](#OwnableUpgradeable-renounceOwnership--) (inherited)
     - [`transferOwnership`](#OwnableUpgradeable-transferOwnership-address-) (inherited)
-    - [`totalSupply`](#ERC721RoundsManagementUpgradeable-totalSupply--) (inherited)
-    - [`totalMintedBy`](#ERC721RoundsManagementUpgradeable-totalMintedBy-address-uint256-) (inherited)
+    - [`totalSupply`](#ERC721RoundsUpgradeable-totalSupply--) (inherited)
+    - [`totalMintedBy`](#ERC721RoundsUpgradeable-totalMintedBy-address-uint256-) (inherited)
     - [`supportsInterface`](#ERC721Upgradeable-supportsInterface-bytes4-) (inherited)
     - [`balanceOf`](#ERC721Upgradeable-balanceOf-address-) (inherited)
     - [`ownerOf`](#ERC721Upgradeable-ownerOf-uint256-) (inherited)
@@ -47,8 +47,8 @@ Dummy contract test the management of mint rounds with {ERC721RoundsManagementUp
     - [`safeTransferFrom`](#ERC721Upgradeable-safeTransferFrom-address-address-uint256-bytes-) (inherited)
 
 - [Internal Functions](#internal-functions)
-    - [`_beforeMint`](#DummyERC721RoundsManagementUpgradeable-_beforeMint-address-uint256-) 
-    - [`_authorizeUpgrade`](#DummyERC721RoundsManagementUpgradeable-_authorizeUpgrade-address-) 
+    - [`_beforeMint`](#DummyERC721RoundsUpgradeable-_beforeMint-address-uint256-) 
+    - [`_authorizeUpgrade`](#DummyERC721RoundsUpgradeable-_authorizeUpgrade-address-) 
     - [`__UUPSUpgradeable_init`](#UUPSUpgradeable-__UUPSUpgradeable_init--) (inherited)
     - [`__UUPSUpgradeable_init_unchained`](#UUPSUpgradeable-__UUPSUpgradeable_init_unchained--) (inherited)
     - [`__ERC1967Upgrade_init`](#ERC1967UpgradeUpgradeable-__ERC1967Upgrade_init--) (inherited)
@@ -65,16 +65,16 @@ Dummy contract test the management of mint rounds with {ERC721RoundsManagementUp
     - [`__Ownable_init_unchained`](#OwnableUpgradeable-__Ownable_init_unchained--) (inherited)
     - [`_checkOwner`](#OwnableUpgradeable-_checkOwner--) (inherited)
     - [`_transferOwnership`](#OwnableUpgradeable-_transferOwnership-address-) (inherited)
-    - [`_publicRoundMint`](#ERC721RoundsManagementUpgradeable-_publicRoundMint-address-uint256-uint256-) (inherited)
-    - [`_privateRoundMint`](#ERC721RoundsManagementUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-) (inherited)
-    - [`_setupRound`](#ERC721RoundsManagementUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-) (inherited)
-    - [`_roundMint`](#ERC721RoundsManagementUpgradeable-_roundMint-address-uint256-uint256-) (inherited)
-    - [`_mintWithAmount`](#ERC721RoundsManagementUpgradeable-_mintWithAmount-address-uint256-) (inherited)
-    - [`_getNextTokenId`](#ERC721RoundsManagementUpgradeable-_getNextTokenId-address-uint256-) (inherited)
-    - [`_checkSignature`](#ERC721RoundsManagementUpgradeable-_checkSignature-uint256-bytes-bytes-address-) (inherited)
-    - [`_beforeRoundMint`](#ERC721RoundsManagementUpgradeable-_beforeRoundMint-address-uint256-) (inherited)
-    - [`_afterRoundMint`](#ERC721RoundsManagementUpgradeable-_afterRoundMint-address-uint256-) (inherited)
-    - [`_afterMint`](#ERC721RoundsManagementUpgradeable-_afterMint-address-uint256-) (inherited)
+    - [`_publicRoundMint`](#ERC721RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-) (inherited)
+    - [`_privateRoundMint`](#ERC721RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-) (inherited)
+    - [`_setupRound`](#ERC721RoundsUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-) (inherited)
+    - [`_roundMint`](#ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-) (inherited)
+    - [`_mintWithAmount`](#ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-) (inherited)
+    - [`_getNextTokenId`](#ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-) (inherited)
+    - [`_checkSignature`](#ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-) (inherited)
+    - [`_beforeRoundMint`](#ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-) (inherited)
+    - [`_afterRoundMint`](#ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-) (inherited)
+    - [`_afterMint`](#ERC721RoundsUpgradeable-_afterMint-address-uint256-) (inherited)
     - [`__ERC721_init`](#ERC721Upgradeable-__ERC721_init-string-string-) (inherited)
     - [`__ERC721_init_unchained`](#ERC721Upgradeable-__ERC721_init_unchained-string-string-) (inherited)
     - [`_baseURI`](#ERC721Upgradeable-_baseURI--) (inherited)
@@ -110,7 +110,7 @@ Dummy contract test the management of mint rounds with {ERC721RoundsManagementUp
     - [`onlyInitializing`](#Initializable-onlyInitializing--) (inherited)
 
 - [Structs](#structs)
-    - [`Round`](#ERC721RoundsManagementUpgradeable-Round) (inherited)
+    - [`Round`](#ERC721RoundsUpgradeable-Round) (inherited)
 
 
 
@@ -148,12 +148,12 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967Upg
 _Inherited from `../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`_.
 
 
-### `RoundSetup(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, uint256 price, address validator)` (inherited) <a name="ERC721RoundsManagementUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-" id="ERC721RoundsManagementUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-"></a>
+### `RoundSetup(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, uint256 price, address validator)` (inherited) <a name="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-" id="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-"></a>
 Event emitted when a round is created or edited
 
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
 ### `Transfer(address from, address to, uint256 tokenId)` (inherited) <a name="IERC721Upgradeable-Transfer-address-address-uint256-" id="IERC721Upgradeable-Transfer-address-address-uint256-"></a>
@@ -191,7 +191,7 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/utils/Initializabl
 
 ## PUBLIC FUNCTIONS
 
-### `constructor()` (public) <a name="DummyERC721RoundsManagementUpgradeable-constructor--" id="DummyERC721RoundsManagementUpgradeable-constructor--"></a>
+### `constructor()` (public) <a name="DummyERC721RoundsUpgradeable-constructor--" id="DummyERC721RoundsUpgradeable-constructor--"></a>
 CONSTRUCTOR
 
 
@@ -200,21 +200,21 @@ CONSTRUCTOR
 
 
 
-### `initialize()` (public) <a name="DummyERC721RoundsManagementUpgradeable-initialize--" id="DummyERC721RoundsManagementUpgradeable-initialize--"></a>
+### `initialize()` (public) <a name="DummyERC721RoundsUpgradeable-initialize--" id="DummyERC721RoundsUpgradeable-initialize--"></a>
 Initialize the contract
 
 
 
 
 
-### `mint(uint256 roundId, uint256 amount)` (external) <a name="DummyERC721RoundsManagementUpgradeable-mint-uint256-uint256-" id="DummyERC721RoundsManagementUpgradeable-mint-uint256-uint256-"></a>
+### `mint(uint256 roundId, uint256 amount)` (external) <a name="DummyERC721RoundsUpgradeable-mint-uint256-uint256-" id="DummyERC721RoundsUpgradeable-mint-uint256-uint256-"></a>
 Mint the `amount` of tokens in a public round.
 
 
-Call {ERC721RoundsManagementUpgradeable-_publicRoundMint}.
+Call {ERC721RoundsUpgradeable-_publicRoundMint}.
 Requirements:
 - Total minted for the user during this round must be less than `maxMintsPerWallet`
-- View {ERC721RoundsManagementUpgradeable-_publicRoundMint} requirements
+- View {ERC721RoundsUpgradeable-_publicRoundMint} requirements
 
 
 
@@ -225,13 +225,13 @@ Parameters:
 
 
 
-### `privateMint(uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (external) <a name="DummyERC721RoundsManagementUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-" id="DummyERC721RoundsManagementUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-"></a>
+### `privateMint(uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (external) <a name="DummyERC721RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-" id="DummyERC721RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-"></a>
 Mint the `amount` of tokens with the signature of the round validator.
 
 
-Call {ERC721RoundsManagementUpgradeable-_privateRoundMint}.
+Call {ERC721RoundsUpgradeable-_privateRoundMint}.
 Requirements:
-- View {ERC721RoundsManagementUpgradeable-_privateRoundMint} requirements
+- View {ERC721RoundsUpgradeable-_privateRoundMint} requirements
 
 
 
@@ -248,14 +248,14 @@ Parameters:
 
 
 
-### `setupRound(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (external) <a name="DummyERC721RoundsManagementUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-" id="DummyERC721RoundsManagementUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-"></a>
+### `setupRound(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (external) <a name="DummyERC721RoundsUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-" id="DummyERC721RoundsUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-"></a>
 
 Create or edit a round
 
-Call {ERC721RoundsManagementUpgradeable-_setupRound}.
+Call {ERC721RoundsUpgradeable-_setupRound}.
 Requirements:
 - msg.sender is owner of the contract
-- View {ERC721RoundsManagementUpgradeable-_setupRound} requirements
+- View {ERC721RoundsUpgradeable-_setupRound} requirements
 
 
 
@@ -335,20 +335,20 @@ Can only be called by the current owner.
 _Inherited from `../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`_.
 
 
-### `totalSupply() → uint256` (public) (inherited)<a name="ERC721RoundsManagementUpgradeable-totalSupply--" id="ERC721RoundsManagementUpgradeable-totalSupply--"></a>
+### `totalSupply() → uint256` (public) (inherited)<a name="ERC721RoundsUpgradeable-totalSupply--" id="ERC721RoundsUpgradeable-totalSupply--"></a>
 Returns the total amount of tokens stored by the contract.
 
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `totalMintedBy(address wallet, uint256 roundId) → uint256` (public) (inherited)<a name="ERC721RoundsManagementUpgradeable-totalMintedBy-address-uint256-" id="ERC721RoundsManagementUpgradeable-totalMintedBy-address-uint256-"></a>
+### `totalMintedBy(address wallet, uint256 roundId) → uint256` (public) (inherited)<a name="ERC721RoundsUpgradeable-totalMintedBy-address-uint256-" id="ERC721RoundsUpgradeable-totalMintedBy-address-uint256-"></a>
 Returns the total amount of tokens minted by `wallet` for `roundId`.
 
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
 ### `supportsInterface(bytes4 interfaceId) → bool` (public) (inherited)<a name="ERC721Upgradeable-supportsInterface-bytes4-" id="ERC721Upgradeable-supportsInterface-bytes4-"></a>
@@ -457,7 +457,7 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgra
 
 ## INTERNAL FUNCTIONS
 
-### `_beforeMint(address to, uint256 amount)` (internal)  <a name="DummyERC721RoundsManagementUpgradeable-_beforeMint-address-uint256-" id="DummyERC721RoundsManagementUpgradeable-_beforeMint-address-uint256-"></a>
+### `_beforeMint(address to, uint256 amount)` (internal)  <a name="DummyERC721RoundsUpgradeable-_beforeMint-address-uint256-" id="DummyERC721RoundsUpgradeable-_beforeMint-address-uint256-"></a>
 Check the max supply before the mint
 
 
@@ -470,7 +470,7 @@ Parameters:
 
 
 
-### `_authorizeUpgrade(address newImplementation)` (internal)  <a name="DummyERC721RoundsManagementUpgradeable-_authorizeUpgrade-address-" id="DummyERC721RoundsManagementUpgradeable-_authorizeUpgrade-address-"></a>
+### `_authorizeUpgrade(address newImplementation)` (internal)  <a name="DummyERC721RoundsUpgradeable-_authorizeUpgrade-address-" id="DummyERC721RoundsUpgradeable-_authorizeUpgrade-address-"></a>
 
 
 
@@ -612,13 +612,13 @@ Internal function without access restriction.
 _Inherited from `../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`_.
 
 
-### `_publicRoundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_publicRoundMint-address-uint256-uint256-" id="ERC721RoundsManagementUpgradeable-_publicRoundMint-address-uint256-uint256-"></a>
+### `_publicRoundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-"></a>
 
 Mint the `amount` of tokens in a round without validator.
-Call {ERC721RoundsManagementUpgradeable-_roundMint}.
+Call {ERC721RoundsUpgradeable-_roundMint}.
 Requirements:
 - Round must not have a validator
-- View {ERC721RoundsManagementUpgradeable-_roundMint} requirements
+- View {ERC721RoundsUpgradeable-_roundMint} requirements
 
 
 
@@ -629,10 +629,10 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_privateRoundMint(address to, uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-" id="ERC721RoundsManagementUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-"></a>
+### `_privateRoundMint(address to, uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-" id="ERC721RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-"></a>
 
 Mint the `amount` of tokens with the signature of the round validator.
 
@@ -641,7 +641,7 @@ Requirements:
 - Total minted for the user during this round must be less than `maxMint`.
 - `sig` must be signed by the validator of the wave and contains all information to check.
 - `payloadExpiration` must be less than the block timestamp.
-- View {ERC721RoundsManagementUpgradeable-_roundMint} requirements.
+- View {ERC721RoundsUpgradeable-_roundMint} requirements.
 
 
 
@@ -658,10 +658,10 @@ Parameters:
 
 - `sig`: The EC signature generated by the wave validator
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_setupRound(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-" id="ERC721RoundsManagementUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-"></a>
+### `_setupRound(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-" id="ERC721RoundsUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-"></a>
 
 Create or edit a round
 
@@ -684,15 +684,15 @@ Parameters:
 
 - `price`: The price of the round in ETH (can be 0)
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_roundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_roundMint-address-uint256-uint256-" id="ERC721RoundsManagementUpgradeable-_roundMint-address-uint256-uint256-"></a>
+### `_roundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-"></a>
 
 Safely mint the `amount` of tokens for `to` address in accordance with round configuration
 
 Requirements:
-- View {ERC721RoundsManagementUpgradeable-_mintWithAmount} Requirements
+- View {ERC721RoundsUpgradeable-_mintWithAmount} Requirements
 - `roundId` must exist and be in progress
 - The round must have enough supply
 - msg.value must contain the price
@@ -706,10 +706,10 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_mintWithAmount(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_mintWithAmount-address-uint256-" id="ERC721RoundsManagementUpgradeable-_mintWithAmount-address-uint256-"></a>
+### `_mintWithAmount(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-" id="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-"></a>
 
 Mint the `amount` of tokens for `to`
 
@@ -726,10 +726,10 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_getNextTokenId(address to, uint256 totalMinted) → uint256` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_getNextTokenId-address-uint256-" id="ERC721RoundsManagementUpgradeable-_getNextTokenId-address-uint256-"></a>
+### `_getNextTokenId(address to, uint256 totalMinted) → uint256` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-" id="ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-"></a>
 
 Gives the identifier for the next minted token (can be override)
 By default, simply increments the last token Id
@@ -741,10 +741,10 @@ Parameters:
 
 - `totalMinted`: Updated total minted
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_checkSignature(uint256 payloadExpiration, bytes data, bytes sig, address signer)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_checkSignature-uint256-bytes-bytes-address-" id="ERC721RoundsManagementUpgradeable-_checkSignature-uint256-bytes-bytes-address-"></a>
+### `_checkSignature(uint256 payloadExpiration, bytes data, bytes sig, address signer)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-" id="ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-"></a>
 Reverts if the data does not correspond to the signature, to the correct signer or if it has expired
 
 
@@ -764,10 +764,10 @@ Parameters:
 
 - `signer`: The address that is supposed to be the signatory
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_beforeRoundMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_beforeRoundMint-address-uint256-" id="ERC721RoundsManagementUpgradeable-_beforeRoundMint-address-uint256-"></a>
+### `_beforeRoundMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-" id="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-"></a>
 
 Hook that is called before any mint in a round
 
@@ -783,10 +783,10 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_afterRoundMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_afterRoundMint-address-uint256-" id="ERC721RoundsManagementUpgradeable-_afterRoundMint-address-uint256-"></a>
+### `_afterRoundMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-" id="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-"></a>
 
 Hook that is called after any mint in a round
 
@@ -796,10 +796,10 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
-### `_afterMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsManagementUpgradeable-_afterMint-address-uint256-" id="ERC721RoundsManagementUpgradeable-_afterMint-address-uint256-"></a>
+### `_afterMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_afterMint-address-uint256-" id="ERC721RoundsUpgradeable-_afterMint-address-uint256-"></a>
 
 Hook that is called after any mint
 
@@ -809,7 +809,7 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 
 ### `__ERC721_init(string name_, string symbol_)` (internal) (inherited) <a name="ERC721Upgradeable-__ERC721_init-string-string-" id="ERC721Upgradeable-__ERC721_init-string-string-"></a>
@@ -1123,7 +1123,7 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/utils/Initializabl
 
 ## STRUCTS
 
-### `Round` (inherited) <a name="ERC721RoundsManagementUpgradeable-Round" id="ERC721RoundsManagementUpgradeable-Round"></a>
+### `Round` (inherited) <a name="ERC721RoundsUpgradeable-Round" id="ERC721RoundsUpgradeable-Round"></a>
 - uint32 supply
 - uint64 startTime
 - uint64 duration
@@ -1131,6 +1131,6 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/utils/Initializabl
 - uint256 totalMinted
 - address validator
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsManagementUpgradeable.sol`_.
+_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
 
 

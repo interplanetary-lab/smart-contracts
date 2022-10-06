@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol";
  * @dev Contract allowing the management of mint rounds for {ERC721Upgradeable}
  * @author Nicolas SENECAL - @senecolas
  */
-contract ERC721RoundsManagementUpgradeable is ERC721Upgradeable {
+contract ERC721RoundsUpgradeable is ERC721Upgradeable {
     using Strings for uint256;
     using ECDSA for bytes32;
 
@@ -105,10 +105,10 @@ contract ERC721RoundsManagementUpgradeable is ERC721Upgradeable {
 
     /**
      * @dev Mint the `amount` of tokens in a round without validator.
-     * @dev Call {ERC721RoundsManagementUpgradeable-_roundMint}.
+     * @dev Call {ERC721RoundsUpgradeable-_roundMint}.
      * @dev Requirements:
      * - Round must not have a validator
-     * - View {ERC721RoundsManagementUpgradeable-_roundMint} requirements
+     * - View {ERC721RoundsUpgradeable-_roundMint} requirements
      *
      * @param to The address who want to mint
      * @param roundId The mint round index
@@ -131,7 +131,7 @@ contract ERC721RoundsManagementUpgradeable is ERC721Upgradeable {
      * - Total minted for the user during this round must be less than `maxMint`.
      * - `sig` must be signed by the validator of the wave and contains all information to check.
      * - `payloadExpiration` must be less than the block timestamp.
-     * - View {ERC721RoundsManagementUpgradeable-_roundMint} requirements.
+     * - View {ERC721RoundsUpgradeable-_roundMint} requirements.
      *
      * @param to The address who want to mint
      * @param roundId The mint round index
@@ -215,7 +215,7 @@ contract ERC721RoundsManagementUpgradeable is ERC721Upgradeable {
      * @dev Safely mint the `amount` of tokens for `to` address in accordance with round configuration
      *
      * @dev Requirements:
-     * - View {ERC721RoundsManagementUpgradeable-_mintWithAmount} Requirements
+     * - View {ERC721RoundsUpgradeable-_mintWithAmount} Requirements
      * - `roundId` must exist and be in progress
      * - The round must have enough supply
      * - msg.value must contain the price

@@ -3,14 +3,14 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "../ERC721RoundsManagementUpgradeable.sol";
+import "../ERC721RoundsUpgradeable.sol";
 
 /**
- * @dev Dummy contract test the management of mint rounds with {ERC721RoundsManagementUpgradeable}
+ * @dev Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
  * @author Nicolas SENECAL - @senecolas
  */
-contract DummyERC721RoundsManagementUpgradeable is
-    ERC721RoundsManagementUpgradeable,
+contract DummyERC721RoundsUpgradeable is
+    ERC721RoundsUpgradeable,
     OwnableUpgradeable,
     UUPSUpgradeable
 {
@@ -43,10 +43,10 @@ contract DummyERC721RoundsManagementUpgradeable is
     /**
      * @notice Mint the `amount` of tokens in a public round.
      *
-     * @dev Call {ERC721RoundsManagementUpgradeable-_publicRoundMint}.
+     * @dev Call {ERC721RoundsUpgradeable-_publicRoundMint}.
      * @dev Requirements:
      * - Total minted for the user during this round must be less than `maxMintsPerWallet`
-     * - View {ERC721RoundsManagementUpgradeable-_publicRoundMint} requirements
+     * - View {ERC721RoundsUpgradeable-_publicRoundMint} requirements
      *
      * @param roundId The mint round index
      * @param amount The number of tokens to mint
@@ -62,9 +62,9 @@ contract DummyERC721RoundsManagementUpgradeable is
     /**
      * @notice Mint the `amount` of tokens with the signature of the round validator.
      *
-     * @dev Call {ERC721RoundsManagementUpgradeable-_privateRoundMint}.
+     * @dev Call {ERC721RoundsUpgradeable-_privateRoundMint}.
      * @dev Requirements:
-     * - View {ERC721RoundsManagementUpgradeable-_privateRoundMint} requirements
+     * - View {ERC721RoundsUpgradeable-_privateRoundMint} requirements
      *
      * @param roundId The mint round index
      * @param amount The number of tokens to mint
@@ -92,10 +92,10 @@ contract DummyERC721RoundsManagementUpgradeable is
     /**
      * @dev Create or edit a round
      *
-     * @dev Call {ERC721RoundsManagementUpgradeable-_setupRound}.
+     * @dev Call {ERC721RoundsUpgradeable-_setupRound}.
      * @dev Requirements:
      * - msg.sender is owner of the contract
-     * - View {ERC721RoundsManagementUpgradeable-_setupRound} requirements
+     * - View {ERC721RoundsUpgradeable-_setupRound} requirements
      *
      * @param roundId The round identifier
      * @param supply Number of tokens that can be minted in this round. Can be 0 for no supply control.

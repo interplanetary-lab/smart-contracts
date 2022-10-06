@@ -7,16 +7,16 @@ const { deployProxy } = require("@openzeppelin/truffle-upgrades");
 const {
   afterSetupRoundTests,
   afterRoundMintTests,
-} = require("./utils/ERC721RoundsManagementUpgradeable.utils.js");
+} = require("./utils/ERC721RoundsUpgradeable.utils.js");
 
 const Web3Utils = require("web3-utils");
 
 // Load artifacts
-const DummyERC721RoundsManagementUpgradeable = artifacts.require(
-  "DummyERC721RoundsManagementUpgradeable"
+const DummyERC721RoundsUpgradeable = artifacts.require(
+  "DummyERC721RoundsUpgradeable"
 );
 
-contract("ERC721RoundsManagementUpgradeable", async (accounts) => {
+contract("ERC721RoundsUpgradeable", async (accounts) => {
   const [owner, user1, user2, ...users] = accounts;
   const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -156,7 +156,7 @@ contract("ERC721RoundsManagementUpgradeable", async (accounts) => {
   describe("\n DEPLOYEMENT", () => {
     it("Smart contract should be deployed", async () => {
       testStartTime = await time.latest();
-      instance = await deployProxy(DummyERC721RoundsManagementUpgradeable, [], {
+      instance = await deployProxy(DummyERC721RoundsUpgradeable, [], {
         initializer: "initialize",
       });
       assert(instance.address !== "");
