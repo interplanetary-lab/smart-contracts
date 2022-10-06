@@ -6,8 +6,8 @@
 <!-- Markdown link & img dfn's -->
 [ethereum-image]: https://img.shields.io/badge/Ethereum-purple?logo=Ethereum
 [ethereum-url]: https://ethereum.org/fr/
-[solidity-image]: https://img.shields.io/badge/Solidity_v0.8.17-gray?logo=Solidity
-[solidity-url]: https://docs.soliditylang.org/en/v0.8.17/
+[solidity-image]: https://img.shields.io/badge/Solidity_v0.8-gray?logo=Solidity
+[solidity-url]: https://docs.soliditylang.org
 
 **Useful toolbox for Interplanetary lab's smart contracts.**
 
@@ -23,7 +23,7 @@
     - [Installation](#installation)
     - [Usage](#usage)
   - [Smart contracts](#smart-contracts-1)
-    - [ERC721RoundsUpgradeable](#ERC721RoundsUpgradeable)
+    - [ERC721RoundsUpgradeable](#erc721roundsupgradeable)
 
 
 ## Overview
@@ -31,7 +31,7 @@
 ### Installation
 
 ```console
-$ npm install @.....
+$ npm install @interplanetary-lab/smart-contracts
 ```
 
 ### Usage
@@ -41,9 +41,9 @@ Once installed, you can use the contracts in the library by importing them:
 ```solidity
 pragma solidity ^0.8.0;
 
-import "@...../contracts/.... .sol";
+import "@interplanetary-lab/smart-contracts/contracts/ERC721Upgradeable/ERC721RoundsUpgradeable.sol";
 
-contract MyContract is ..... {
+contract MyContract is ERC721RoundsUpgradeable {
 
 }
 ```
