@@ -56,7 +56,7 @@ contract DummyERC721RoundsManagementUpgradeable is
             totalMintedBy(msg.sender, roundId) + amount <= maxMintsPerWallet,
             "Max allowed"
         );
-        _roundMint(msg.sender, roundId, amount);
+        _publicRoundMint(msg.sender, roundId, amount);
     }
 
     /**

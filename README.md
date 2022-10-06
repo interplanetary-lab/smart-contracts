@@ -72,7 +72,7 @@ function mint(uint256 roundId, uint256 amount) external payable virtual {
     //    totalMintedBy(msg.sender, roundId) + amount <= maxMintsPerWallet,
     //    "Max allowed"
     // );
-    _roundMint(msg.sender, roundId, amount);
+    _publicRoundMint(msg.sender, roundId, amount);
 }
 ```
 
