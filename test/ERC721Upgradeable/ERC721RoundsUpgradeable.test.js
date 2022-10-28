@@ -152,9 +152,9 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
    */
 
   /**
-   * DEPLOYEMENT
+   * DEPLOYMENT
    */
-  describe("\n DEPLOYEMENT", () => {
+  describe("\n DEPLOYMENT", () => {
     it("Smart contract should be deployed", async () => {
       testStartTime = await time.latest();
       instance = await deployProxy(DummyERC721RoundsUpgradeable, [], {
