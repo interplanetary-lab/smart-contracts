@@ -20,20 +20,22 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
 
     /**
      * @notice Structure for packing the information of a mint round
+     * @member id The round id for reverse mapping
      * @member supply Number of tokens that can be minted in this round. Can be 0 for no supply control.
      * @member totalMinted Number of token minted in this round
      * @member startTime The start date of the round in seconds
+     * @member validator The address of the whitelist validator. Can be 'address(0)' for no whitelist
      * @member duration The duration of the round in seconds. Can be 0 for no time limitation
      * @member price The price of the round in ETH (can be 0)
-     * @member validator The address of the whitelist validator. Can be 'address(0)' for no whitelist
      */
     struct Round {
+        uint256 id;
         uint32 supply;
         uint64 startTime;
         uint64 duration;
+        address validator;
         uint256 price;
         uint256 totalMinted;
-        address validator;
     }
 
     /**
@@ -50,8 +52,8 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
         uint32 supply,
         uint64 startTime,
         uint64 duration,
-        uint256 price,
-        address validator
+        address validator,
+        uint256 price
     );
 
     /**
@@ -95,6 +97,21 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
         returns (uint256)
     {
         return _roundsToOwnerTotalMinted[roundId][wallet];
+    }
+
+    /**
+     * @notice Returns the array of all rounds stored in the contract.
+     *
+     * @dev Starts with the index of roundId 1
+     * @dev Function for web3 first, this one is not recommended for a call
+     *      from another smart contract (can be expensive in gas).
+     */
+    function allRounds() public view returns (Round[] memory) {
+        Round[] memory all = new Round[](roundsLength);
+        for (uint256 id = 0; id < roundsLength; ++id) {
+            all[id] = rounds[id + 1];
+        }
+        return all;
     }
 
     /**
@@ -202,13 +219,14 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
         }
 
         Round storage round = rounds[roundId];
+        round.id = roundId;
         round.supply = supply;
         round.startTime = startTime;
         round.duration = duration;
         round.price = price;
         round.validator = validator;
 
-        emit RoundSetup(roundId, supply, startTime, duration, price, validator);
+        emit RoundSetup(roundId, supply, startTime, duration, validator, price);
     }
 
     /**

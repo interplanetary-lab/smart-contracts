@@ -162,6 +162,7 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
       assert(instance.address !== "");
       MAX_SUPPLY = await instance.MAX_SUPPLY();
       chainId = await web3.eth.getChainId();
+      chainId = 1;
       maxMintsPerWallet = await instance.maxMintsPerWallet();
     });
 
@@ -253,6 +254,51 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
 
     it(`Owner can create round 2 (public)`, async () => {
       await setupRound(rounds[2]);
+    });
+
+    it(`Everyone can get the array of rounds with allRounds view function`, async () => {
+      const allRounds = await instance.allRounds();
+
+      assert.equal(
+        allRounds.length,
+        rounds.length - 1,
+        "Invalid allRounds length"
+      );
+
+      for (const [idx, round] of allRounds.entries()) {
+        const expectedRound = rounds[idx + 1];
+
+        assert.equal(
+          round.id.toString(),
+          expectedRound.roundId.toString(),
+          "Invalid roundId"
+        );
+        assert.equal(
+          round.supply.toString(),
+          expectedRound.supply.toString(),
+          "Invalid supply"
+        );
+        assert.equal(
+          round.startTime.toString(),
+          testStartTime.add(expectedRound.startTime).toString(),
+          "Invalid startTime"
+        );
+        assert.equal(
+          round.duration.toString(),
+          expectedRound.duration.toString(),
+          "Invalid duration"
+        );
+        assert.equal(
+          round.validator,
+          expectedRound.validator ?? ZERO_ADDRESS,
+          "Invalid validator"
+        );
+        assert.equal(
+          round.price.toString(),
+          expectedRound.price.toString(),
+          "Invalid validator"
+        );
+      }
     });
   });
 

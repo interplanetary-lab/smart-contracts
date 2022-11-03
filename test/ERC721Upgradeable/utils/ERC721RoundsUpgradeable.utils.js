@@ -24,6 +24,7 @@ const afterSetupRoundTests = async (
     startTime.toString(),
     "Bad startTime"
   );
+  assert.equal(round.id.toString(), roundId.toString(), "Bad Id");
   assert.equal(round.duration.toString(), duration.toString(), "Bad duration");
   assert.equal(
     round.validator.toString(),
