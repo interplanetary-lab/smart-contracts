@@ -3,14 +3,14 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import "../ERC721RoundsUpgradeable.sol";
+import "../ERC1155RoundsUpgradeable.sol";
 
 /**
- * @dev Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
+ * @dev Dummy contract test the management of mint rounds with {ERC1155RoundsUpgradeable}
  * @author Interplanetary Lab <contact@interplanetary-lab.io>
  */
-contract DummyERC721RoundsUpgradeable is
-    ERC721RoundsUpgradeable,
+contract DummyERC1155RoundsUpgradeable is
+    ERC1155RoundsUpgradeable,
     OwnableUpgradeable,
     UUPSUpgradeable
 {
@@ -33,7 +33,7 @@ contract DummyERC721RoundsUpgradeable is
      * @notice Initialize the contract
      */
     function initialize() public initializer {
-        __ERC721_init("Dummy", "DUM");
+        __ERC1155_init("uri");
         __Ownable_init();
         __UUPSUpgradeable_init();
 
@@ -98,6 +98,7 @@ contract DummyERC721RoundsUpgradeable is
      * - View {ERC721RoundsUpgradeable-_setupRound} requirements
      *
      * @param roundId The round identifier
+     * @param tokenId The token index
      * @param supply Number of tokens that can be minted in this round. Can be 0 for no supply control.
      * @param startTime The start date of the round in seconds
      * @param duration The duration of the round in seconds. Can be 0 for no time limitation
@@ -106,13 +107,14 @@ contract DummyERC721RoundsUpgradeable is
      */
     function setupRound(
         uint256 roundId,
+        uint256 tokenId,
         uint32 supply,
         uint64 startTime,
         uint64 duration,
         address validator,
         uint256 price
     ) external virtual onlyOwner {
-        _setupRound(roundId, supply, startTime, duration, validator, price);
+        _setupRound(roundId, tokenId, supply, startTime, duration, validator, price);
     }
 
     /**
@@ -121,9 +123,9 @@ contract DummyERC721RoundsUpgradeable is
      * @param to The wallet to transfer new tokens
      * @param amount The number of tokens to mint
      */
-    function _beforeMint(address to, uint256 amount) internal virtual override {
-        require(_totalMinted + amount <= MAX_SUPPLY, "Supply exceeded");
-        super._beforeMint(to, amount);
+    function _beforeMint(address to, uint256 tokenId, uint256 amount) internal virtual override {
+        require(_totalMinted[tokenId] + amount <= MAX_SUPPLY, "Supply exceeded");
+        super._beforeMint(to, tokenId, amount);
     }
 
     function _authorizeUpgrade(address newImplementation)

@@ -5,18 +5,21 @@ const { BN } = require("@openzeppelin/test-helpers");
 const { deployProxy } = require("@openzeppelin/truffle-upgrades");
 
 const {
-  afterSetupRoundTests,
-  afterRoundMintTests,
-} = require("./utils/ERC721RoundsUpgradeable.utils.js");
+  getValidatorSignature,
+  setupRoundTests,
+  roundMintTests,
+} = require("./utils/ERC1155RoundsUpgradeable.utils.js");
 
 const Web3Utils = require("web3-utils");
 
+const tokenId = 1;
+
 // Load artifacts
-const DummyERC721RoundsUpgradeable = artifacts.require(
-  "DummyERC721RoundsUpgradeable"
+const DummyERC1155RoundsUpgradeable = artifacts.require(
+  "DummyERC1155RoundsUpgradeable"
 );
 
-contract("ERC721RoundsUpgradeable", async (accounts) => {
+contract("ERC1155RoundsUpgradeable", async (accounts) => {
   const [owner, user1, user2, ...users] = accounts;
   const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -33,6 +36,7 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
     {
       roundId: 1,
       supply: 30,
+      tokenId: 1,
       startTime: time.duration.days(1), // to add to `testStartTime`
       duration: time.duration.days(1),
       validator: "0x6F76846f7C90EcEC371e1d96cA93bfE9d36eEb83",
@@ -42,6 +46,7 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
     },
     {
       roundId: 2,
+      tokenId: 1,
       startTime: time.duration.days(2), // to add to `testStartTime`
       duration: 0,
       // no validator
@@ -61,11 +66,6 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
    * ========================
    */
 
-  function getSignature(validator_private_key, data) {
-    let message = web3.utils.soliditySha3(web3.utils.encodePacked(...data));
-    return web3.eth.accounts.sign(message, validator_private_key).signature;
-  }
-
   /**
    * Setup a round
    */
@@ -77,6 +77,7 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
 
     const tx = await instance.setupRound(
       roundId,
+      tokenId,
       supply,
       testStartTime.add(startTime),
       duration,
@@ -84,9 +85,10 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
       price,
       { from: from }
     );
-    await afterSetupRoundTests(
+    await setupRoundTests(
       instance,
       roundId,
+      tokenId,
       supply,
       testStartTime.add(startTime),
       duration,
@@ -121,9 +123,15 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
       const payloadExpiration =
         overrideData?.payloadExpiration ||
         latestTime.add(time.duration.minutes(30));
-      const signature = getSignature(
-        overrideData?.validator_private_key || validator_private_key,
-        [user, payloadExpiration, roundId, maxMint, instance.address, chainId]
+      const signature = getValidatorSignature(
+        user,
+        payloadExpiration,
+        roundId,
+        tokenId,
+        maxMint,
+        instance.address,
+        chainId,
+        overrideData?.validator_private_key || validator_private_key
       );
       tx = await instance.privateMint(
         roundId,
@@ -141,7 +149,7 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
     // Increase contractBalance
     contractBalance = contractBalance.add(price);
 
-    await afterRoundMintTests(tx, instance, user, roundId, amount, maxMint);
+    await roundMintTests(tx, instance, user, roundId, amount, maxMint);
   };
 
   /**
@@ -156,12 +164,12 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
   describe("\n DEPLOYEMENT", () => {
     it("Smart contract should be deployed", async () => {
       testStartTime = await time.latest();
-      instance = await deployProxy(DummyERC721RoundsUpgradeable, [], {
+      instance = await deployProxy(DummyERC1155RoundsUpgradeable, [], {
         initializer: "initialize",
       });
       assert(instance.address !== "");
       MAX_SUPPLY = await instance.MAX_SUPPLY();
-      chainId = await web3.eth.getChainId();
+      // chainId = await web3.eth.getChainId();
       chainId = 1;
       maxMintsPerWallet = await instance.maxMintsPerWallet();
     });
@@ -172,14 +180,16 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
       const maxMint = 1;
       const latestTime = await time.latest();
       const payloadExpiration = latestTime.add(time.duration.minutes(30));
-      const signature = getSignature(rounds[1].validator_private_key, [
+      const signature = getValidatorSignature(
         user1,
         payloadExpiration,
         roundId,
+        tokenId,
         maxMint,
         instance.address,
         chainId,
-      ]);
+        rounds[1].validator_private_key
+      );
 
       await expectRevert(
         instance.privateMint(
@@ -254,51 +264,6 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
 
     it(`Owner can create round 2 (public)`, async () => {
       await setupRound(rounds[2]);
-    });
-
-    it(`Everyone can get the array of rounds with allRounds view function`, async () => {
-      const allRounds = await instance.allRounds();
-
-      assert.equal(
-        allRounds.length,
-        rounds.length - 1,
-        "Invalid allRounds length"
-      );
-
-      for (const [idx, round] of allRounds.entries()) {
-        const expectedRound = rounds[idx + 1];
-
-        assert.equal(
-          round.id.toString(),
-          expectedRound.roundId.toString(),
-          "Invalid roundId"
-        );
-        assert.equal(
-          round.supply.toString(),
-          expectedRound.supply.toString(),
-          "Invalid supply"
-        );
-        assert.equal(
-          round.startTime.toString(),
-          testStartTime.add(expectedRound.startTime).toString(),
-          "Invalid startTime"
-        );
-        assert.equal(
-          round.duration.toString(),
-          expectedRound.duration.toString(),
-          "Invalid duration"
-        );
-        assert.equal(
-          round.validator,
-          expectedRound.validator ?? ZERO_ADDRESS,
-          "Invalid validator"
-        );
-        assert.equal(
-          round.price.toString(),
-          expectedRound.price.toString(),
-          "Invalid validator"
-        );
-      }
     });
   });
 
@@ -596,14 +561,16 @@ contract("ERC721RoundsUpgradeable", async (accounts) => {
       const price = rounds[1].price;
       const latestTime = await time.latest();
       const payloadExpiration = latestTime.add(time.duration.minutes(30));
-      const signature = getSignature(otherPrivateKey, [
-        user,
+      const signature = getValidatorSignature(
+        user1,
         payloadExpiration,
         roundId,
+        tokenId,
         maxMint,
         instance.address,
         chainId,
-      ]);
+        otherPrivateKey
+      );
 
       await expectRevert(
         instance.privateMint(
