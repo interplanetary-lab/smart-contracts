@@ -4,6 +4,7 @@
 [![Solidity][solidity-image]][solidity-url]
 
 <!-- Markdown link & img dfn's -->
+
 [ethereum-image]: https://img.shields.io/badge/Ethereum-purple?logo=Ethereum
 [ethereum-url]: https://ethereum.org/fr/
 [solidity-image]: https://img.shields.io/badge/Solidity_v0.8-gray?logo=Solidity
@@ -15,16 +16,15 @@
 - Allows inter-compatibility with others tools of Interplanetary lab's.
 - Provide audited (comming soon) and tested smart contracts.
 
-
 ## Table of Contents
+
 - [SMART CONTRACTS](#smart-contracts)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
     - [Installation](#installation)
     - [Usage](#usage)
   - [Smart contracts](#smart-contracts-1)
-    - [ERC721RoundsUpgradeable](#erc721roundsupgradeable)
-
+    - [ERC721RoundsUpgradeable and ERC1155RoundsUpgradeable](#erc721roundsupgradeable-and-erc1155roundsupgradeable)
 
 ## Overview
 
@@ -48,26 +48,29 @@ contract MyContract is ERC721RoundsUpgradeable {
 }
 ```
 
-
 ## Smart contracts
 
-### ERC721RoundsUpgradeable
-[View documentation](./docs/ERC721Upgradeable/ERC721RoundsUpgradeable.md)
+### ERC721RoundsUpgradeable and ERC1155RoundsUpgradeable
+
+[View documentation for ERC721RoundsUpgradeable](./docs/ERC721Upgradeable/ERC721RoundsUpgradeable.md)
+[View documentation for ERC1155RoundsUpgradeable](./docs/ERC1155Upgradeable/ERC1155RoundsUpgradeable.md)
 
 **Overview**
 
-Contract allowing the management of mint rounds for [OpenZeppelin ERC721Upgradeable](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/token/ERC721/ERC721Upgradeable.sol).
+Contract allowing the management of mint rounds for [OpenZeppelin ERC721Upgradeable](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/token/ERC721/ERC721Upgradeable.sol) or [OpenZeppelin ERC1155Upgradeable](https://github.com/OpenZeppelin/openzeppelin-contracts-upgradeable/blob/master/contracts/token/ERC1155/ERC1155Upgradeable.sol).
+
 - Create rounds with a start date, a duration, a supply and a price.
 - Can setup a private round with a validator address where the mint is authorized through the validator's signature only.
 - In a private round, the `maxMint` of a wallet is determined by the validator.
-
+- For ERC1155, each round is determined for only one tokenId
 
 **Usage**
 
 1. Setup public and private mint functions
+
 ```solidity
 function mint(uint256 roundId, uint256 amount) external payable virtual {
-    // My custom requirements 
+    // My custom requirements
     // require(
     //    totalMintedBy(msg.sender, roundId) + amount <= maxMintsPerWallet,
     //    "Max allowed"
@@ -99,6 +102,7 @@ function privateMint(
 ```
 
 2. Setup before and after mint custom requirements
+
 ```solidity
 function _beforeMint(address to, uint256 amount) internal virtual override {
     // My custom requirements
@@ -108,6 +112,7 @@ function _beforeMint(address to, uint256 amount) internal virtual override {
 ```
 
 3. _(optional)_ Personalize the assignment of identifiers (by default start at 1).
+
 ```solidity
 function _getNextTokenId(address to, uint256 totalMinted)
     internal
@@ -120,6 +125,7 @@ function _getNextTokenId(address to, uint256 totalMinted)
 ```
 
 4. Gives admin access to setup rounds (here with [OpenZeppelin Ownable](https://docs.openzeppelin.com/contracts/4.x/api/access#Ownable))
+
 ```solidity
 function setupRound(
     uint256 roundId,
@@ -135,22 +141,23 @@ function setupRound(
 
 **Signature provider for private mint**
 
-In a private mint, the signature of the validator address must be generated like this: 
+In a private mint, the signature of the validator address must be generated like this:
 
 ```javascript
 let message = web3.utils.soliditySha3(
-    web3.utils.encodePacked(
-        user_address, // The address who want to mint
-        payloadExpiration, // The maximum timestamp before the signature is considered invalid
-        roundId, // The mint round index
-        maxMint, // The maximum token that the user is allowed to mint in the round 
-        smartContractAddress, // The address of the smart contract (to maximize security)
-        smartContractChainId, // The chainId of the smart contract (to maximize security)
-    )
+  web3.utils.encodePacked(
+    user_address, // The address who want to mint
+    payloadExpiration, // The maximum timestamp before the signature is considered invalid
+    roundId, // The mint round index
+    // tokenID // The tokenId for ERC1155
+    maxMint, // The maximum token that the user is allowed to mint in the round
+    smartContractAddress, // The address of the smart contract (to maximize security)
+    smartContractChainId // The chainId of the smart contract (to maximize security)
+  )
 );
 return web3.eth.accounts.sign(message, validator_private_key).signature;
 ```
 
 **Example**
 
-For a complete example, see [DummyERC721RoundsUpgradeable](./contracts/ERC721Upgradeable/exemples/DummyERC721RoundsUpgradeable.sol) smart contract.
+For a complete example, see [DummyERC721RoundsUpgradeable](./contracts/ERC721Upgradeable/exemples/DummyERC721RoundsUpgradeable.sol) or [DummyERC1155RoundsUpgradeable](./contracts/ERC1155Upgradeable/exemples/DummyERC1155RoundsUpgradeable.sol)smart contract.

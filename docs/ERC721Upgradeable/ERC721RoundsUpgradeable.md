@@ -8,7 +8,7 @@ Contract allowing the management of mint rounds for {ERC721Upgradeable}
 
 ## TABLE OF CONTENTS
 - [Events](#events)
-    - [`RoundSetup`](#ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-) 
+    - [`RoundSetup`](#ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-address-uint256-) 
     - [`Transfer`](#IERC721Upgradeable-Transfer-address-address-uint256-) (inherited)
     - [`Approval`](#IERC721Upgradeable-Approval-address-address-uint256-) (inherited)
     - [`ApprovalForAll`](#IERC721Upgradeable-ApprovalForAll-address-address-bool-) (inherited)
@@ -17,6 +17,7 @@ Contract allowing the management of mint rounds for {ERC721Upgradeable}
 - [Public Functions](#public-functions)
     - [`totalSupply`](#ERC721RoundsUpgradeable-totalSupply--) 
     - [`totalMintedBy`](#ERC721RoundsUpgradeable-totalMintedBy-address-uint256-) 
+    - [`allRounds`](#ERC721RoundsUpgradeable-allRounds--) 
     - [`supportsInterface`](#ERC721Upgradeable-supportsInterface-bytes4-) (inherited)
     - [`balanceOf`](#ERC721Upgradeable-balanceOf-address-) (inherited)
     - [`ownerOf`](#ERC721Upgradeable-ownerOf-uint256-) (inherited)
@@ -81,7 +82,7 @@ Contract allowing the management of mint rounds for {ERC721Upgradeable}
 
 ## EVENTS
 
-### `RoundSetup(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, uint256 price, address validator)`  <a name="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-" id="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-uint256-address-"></a>
+### `RoundSetup(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)`  <a name="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-address-uint256-" id="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-address-uint256-"></a>
 Event emitted when a round is created or edited
 
 
@@ -133,6 +134,17 @@ Returns the total amount of tokens stored by the contract.
 ### `totalMintedBy(address wallet, uint256 roundId) → uint256` (public) <a name="ERC721RoundsUpgradeable-totalMintedBy-address-uint256-" id="ERC721RoundsUpgradeable-totalMintedBy-address-uint256-"></a>
 Returns the total amount of tokens minted by `wallet` for `roundId`.
 
+
+
+
+
+### `allRounds() → struct ERC721RoundsUpgradeable.Round[]` (public) <a name="ERC721RoundsUpgradeable-allRounds--" id="ERC721RoundsUpgradeable-allRounds--"></a>
+Returns the array of all rounds stored in the contract.
+
+
+Starts with the index of roundId 1
+Function for web3 first, this one is not recommended for a call
+     from another smart contract (can be expensive in gas).
 
 
 
@@ -729,12 +741,13 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/utils/Initializabl
 ## STRUCTS
 
 ### `Round`  <a name="ERC721RoundsUpgradeable-Round" id="ERC721RoundsUpgradeable-Round"></a>
+- uint256 id
 - uint32 supply
 - uint64 startTime
 - uint64 duration
+- address validator
 - uint256 price
 - uint256 totalMinted
-- address validator
 
 
 

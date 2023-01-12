@@ -1,9 +1,9 @@
-# `DummyERC721RoundsUpgradeable`
-**Documentation of `ERC721Upgradeable/exemples/DummyERC721RoundsUpgradeable.sol`.**
+# `DummyERC1155RoundsUpgradeable`
+**Documentation of `ERC1155Upgradeable/exemples/DummyERC1155RoundsUpgradeable.sol`.**
 
 
 
-Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
+Dummy contract test the management of mint rounds with {ERC1155RoundsUpgradeable}
 
 
 ## TABLE OF CONTENTS
@@ -12,44 +12,40 @@ Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
     - [`AdminChanged`](#ERC1967UpgradeUpgradeable-AdminChanged-address-address-) (inherited)
     - [`BeaconUpgraded`](#ERC1967UpgradeUpgradeable-BeaconUpgraded-address-) (inherited)
     - [`OwnershipTransferred`](#OwnableUpgradeable-OwnershipTransferred-address-address-) (inherited)
-    - [`RoundSetup`](#ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-address-uint256-) (inherited)
-    - [`Transfer`](#IERC721Upgradeable-Transfer-address-address-uint256-) (inherited)
-    - [`Approval`](#IERC721Upgradeable-Approval-address-address-uint256-) (inherited)
-    - [`ApprovalForAll`](#IERC721Upgradeable-ApprovalForAll-address-address-bool-) (inherited)
+    - [`RoundSetup`](#ERC1155RoundsUpgradeable-RoundSetup-uint256-uint256-uint32-uint64-uint64-uint256-address-) (inherited)
+    - [`TransferSingle`](#IERC1155Upgradeable-TransferSingle-address-address-address-uint256-uint256-) (inherited)
+    - [`TransferBatch`](#IERC1155Upgradeable-TransferBatch-address-address-address-uint256---uint256---) (inherited)
+    - [`ApprovalForAll`](#IERC1155Upgradeable-ApprovalForAll-address-address-bool-) (inherited)
+    - [`URI`](#IERC1155Upgradeable-URI-string-uint256-) (inherited)
     - [`Initialized`](#Initializable-Initialized-uint8-) (inherited)
 
 - [Public Functions](#public-functions)
-    - [`constructor`](#DummyERC721RoundsUpgradeable-constructor--) 
-    - [`initialize`](#DummyERC721RoundsUpgradeable-initialize--) 
-    - [`mint`](#DummyERC721RoundsUpgradeable-mint-uint256-uint256-) 
-    - [`privateMint`](#DummyERC721RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-) 
-    - [`setupRound`](#DummyERC721RoundsUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-) 
+    - [`constructor`](#DummyERC1155RoundsUpgradeable-constructor--) 
+    - [`initialize`](#DummyERC1155RoundsUpgradeable-initialize--) 
+    - [`mint`](#DummyERC1155RoundsUpgradeable-mint-uint256-uint256-) 
+    - [`privateMint`](#DummyERC1155RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-) 
+    - [`setupRound`](#DummyERC1155RoundsUpgradeable-setupRound-uint256-uint256-uint32-uint64-uint64-address-uint256-) 
     - [`proxiableUUID`](#UUPSUpgradeable-proxiableUUID--) (inherited)
     - [`upgradeTo`](#UUPSUpgradeable-upgradeTo-address-) (inherited)
     - [`upgradeToAndCall`](#UUPSUpgradeable-upgradeToAndCall-address-bytes-) (inherited)
     - [`owner`](#OwnableUpgradeable-owner--) (inherited)
     - [`renounceOwnership`](#OwnableUpgradeable-renounceOwnership--) (inherited)
     - [`transferOwnership`](#OwnableUpgradeable-transferOwnership-address-) (inherited)
-    - [`totalSupply`](#ERC721RoundsUpgradeable-totalSupply--) (inherited)
-    - [`totalMintedBy`](#ERC721RoundsUpgradeable-totalMintedBy-address-uint256-) (inherited)
-    - [`allRounds`](#ERC721RoundsUpgradeable-allRounds--) (inherited)
-    - [`supportsInterface`](#ERC721Upgradeable-supportsInterface-bytes4-) (inherited)
-    - [`balanceOf`](#ERC721Upgradeable-balanceOf-address-) (inherited)
-    - [`ownerOf`](#ERC721Upgradeable-ownerOf-uint256-) (inherited)
-    - [`name`](#ERC721Upgradeable-name--) (inherited)
-    - [`symbol`](#ERC721Upgradeable-symbol--) (inherited)
-    - [`tokenURI`](#ERC721Upgradeable-tokenURI-uint256-) (inherited)
-    - [`approve`](#ERC721Upgradeable-approve-address-uint256-) (inherited)
-    - [`getApproved`](#ERC721Upgradeable-getApproved-uint256-) (inherited)
-    - [`setApprovalForAll`](#ERC721Upgradeable-setApprovalForAll-address-bool-) (inherited)
-    - [`isApprovedForAll`](#ERC721Upgradeable-isApprovedForAll-address-address-) (inherited)
-    - [`transferFrom`](#ERC721Upgradeable-transferFrom-address-address-uint256-) (inherited)
-    - [`safeTransferFrom`](#ERC721Upgradeable-safeTransferFrom-address-address-uint256-) (inherited)
-    - [`safeTransferFrom`](#ERC721Upgradeable-safeTransferFrom-address-address-uint256-bytes-) (inherited)
+    - [`totalSupply`](#ERC1155RoundsUpgradeable-totalSupply-uint256-) (inherited)
+    - [`totalMintedBy`](#ERC1155RoundsUpgradeable-totalMintedBy-address-uint256-) (inherited)
+    - [`allRounds`](#ERC1155RoundsUpgradeable-allRounds--) (inherited)
+    - [`supportsInterface`](#ERC1155Upgradeable-supportsInterface-bytes4-) (inherited)
+    - [`uri`](#ERC1155Upgradeable-uri-uint256-) (inherited)
+    - [`balanceOf`](#ERC1155Upgradeable-balanceOf-address-uint256-) (inherited)
+    - [`balanceOfBatch`](#ERC1155Upgradeable-balanceOfBatch-address---uint256---) (inherited)
+    - [`setApprovalForAll`](#ERC1155Upgradeable-setApprovalForAll-address-bool-) (inherited)
+    - [`isApprovedForAll`](#ERC1155Upgradeable-isApprovedForAll-address-address-) (inherited)
+    - [`safeTransferFrom`](#ERC1155Upgradeable-safeTransferFrom-address-address-uint256-uint256-bytes-) (inherited)
+    - [`safeBatchTransferFrom`](#ERC1155Upgradeable-safeBatchTransferFrom-address-address-uint256---uint256---bytes-) (inherited)
 
 - [Internal Functions](#internal-functions)
-    - [`_beforeMint`](#DummyERC721RoundsUpgradeable-_beforeMint-address-uint256-) 
-    - [`_authorizeUpgrade`](#DummyERC721RoundsUpgradeable-_authorizeUpgrade-address-) 
+    - [`_beforeMint`](#DummyERC1155RoundsUpgradeable-_beforeMint-address-uint256-uint256-) 
+    - [`_authorizeUpgrade`](#DummyERC1155RoundsUpgradeable-_authorizeUpgrade-address-) 
     - [`__UUPSUpgradeable_init`](#UUPSUpgradeable-__UUPSUpgradeable_init--) (inherited)
     - [`__UUPSUpgradeable_init_unchained`](#UUPSUpgradeable-__UUPSUpgradeable_init_unchained--) (inherited)
     - [`__ERC1967Upgrade_init`](#ERC1967UpgradeUpgradeable-__ERC1967Upgrade_init--) (inherited)
@@ -66,32 +62,29 @@ Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
     - [`__Ownable_init_unchained`](#OwnableUpgradeable-__Ownable_init_unchained--) (inherited)
     - [`_checkOwner`](#OwnableUpgradeable-_checkOwner--) (inherited)
     - [`_transferOwnership`](#OwnableUpgradeable-_transferOwnership-address-) (inherited)
-    - [`_publicRoundMint`](#ERC721RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-) (inherited)
-    - [`_privateRoundMint`](#ERC721RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-) (inherited)
-    - [`_setupRound`](#ERC721RoundsUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-) (inherited)
-    - [`_roundMint`](#ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-) (inherited)
-    - [`_mintWithAmount`](#ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-) (inherited)
-    - [`_getNextTokenId`](#ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-) (inherited)
-    - [`_checkSignature`](#ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-) (inherited)
-    - [`_beforeRoundMint`](#ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-) (inherited)
-    - [`_afterRoundMint`](#ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-) (inherited)
-    - [`_afterMint`](#ERC721RoundsUpgradeable-_afterMint-address-uint256-) (inherited)
-    - [`__ERC721_init`](#ERC721Upgradeable-__ERC721_init-string-string-) (inherited)
-    - [`__ERC721_init_unchained`](#ERC721Upgradeable-__ERC721_init_unchained-string-string-) (inherited)
-    - [`_baseURI`](#ERC721Upgradeable-_baseURI--) (inherited)
-    - [`_safeTransfer`](#ERC721Upgradeable-_safeTransfer-address-address-uint256-bytes-) (inherited)
-    - [`_exists`](#ERC721Upgradeable-_exists-uint256-) (inherited)
-    - [`_isApprovedOrOwner`](#ERC721Upgradeable-_isApprovedOrOwner-address-uint256-) (inherited)
-    - [`_safeMint`](#ERC721Upgradeable-_safeMint-address-uint256-) (inherited)
-    - [`_safeMint`](#ERC721Upgradeable-_safeMint-address-uint256-bytes-) (inherited)
-    - [`_mint`](#ERC721Upgradeable-_mint-address-uint256-) (inherited)
-    - [`_burn`](#ERC721Upgradeable-_burn-uint256-) (inherited)
-    - [`_transfer`](#ERC721Upgradeable-_transfer-address-address-uint256-) (inherited)
-    - [`_approve`](#ERC721Upgradeable-_approve-address-uint256-) (inherited)
-    - [`_setApprovalForAll`](#ERC721Upgradeable-_setApprovalForAll-address-address-bool-) (inherited)
-    - [`_requireMinted`](#ERC721Upgradeable-_requireMinted-uint256-) (inherited)
-    - [`_beforeTokenTransfer`](#ERC721Upgradeable-_beforeTokenTransfer-address-address-uint256-) (inherited)
-    - [`_afterTokenTransfer`](#ERC721Upgradeable-_afterTokenTransfer-address-address-uint256-) (inherited)
+    - [`__ERC1155Rounds_init`](#ERC1155RoundsUpgradeable-__ERC1155Rounds_init--) (inherited)
+    - [`__ERC1155Rounds_init_unchained`](#ERC1155RoundsUpgradeable-__ERC1155Rounds_init_unchained--) (inherited)
+    - [`_publicRoundMint`](#ERC1155RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-) (inherited)
+    - [`_privateRoundMint`](#ERC1155RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-) (inherited)
+    - [`_setupRound`](#ERC1155RoundsUpgradeable-_setupRound-uint256-uint256-uint32-uint64-uint64-address-uint256-) (inherited)
+    - [`_roundMint`](#ERC1155RoundsUpgradeable-_roundMint-address-uint256-uint256-) (inherited)
+    - [`_mintWithAmount`](#ERC1155RoundsUpgradeable-_mintWithAmount-address-uint256-uint256-) (inherited)
+    - [`_checkSignature`](#ERC1155RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-) (inherited)
+    - [`_beforeRoundMint`](#ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-) (inherited)
+    - [`_afterRoundMint`](#ERC1155RoundsUpgradeable-_afterRoundMint-address-uint256-uint256-) (inherited)
+    - [`_afterMint`](#ERC1155RoundsUpgradeable-_afterMint-address-uint256-uint256-) (inherited)
+    - [`__ERC1155_init`](#ERC1155Upgradeable-__ERC1155_init-string-) (inherited)
+    - [`__ERC1155_init_unchained`](#ERC1155Upgradeable-__ERC1155_init_unchained-string-) (inherited)
+    - [`_safeTransferFrom`](#ERC1155Upgradeable-_safeTransferFrom-address-address-uint256-uint256-bytes-) (inherited)
+    - [`_safeBatchTransferFrom`](#ERC1155Upgradeable-_safeBatchTransferFrom-address-address-uint256---uint256---bytes-) (inherited)
+    - [`_setURI`](#ERC1155Upgradeable-_setURI-string-) (inherited)
+    - [`_mint`](#ERC1155Upgradeable-_mint-address-uint256-uint256-bytes-) (inherited)
+    - [`_mintBatch`](#ERC1155Upgradeable-_mintBatch-address-uint256---uint256---bytes-) (inherited)
+    - [`_burn`](#ERC1155Upgradeable-_burn-address-uint256-uint256-) (inherited)
+    - [`_burnBatch`](#ERC1155Upgradeable-_burnBatch-address-uint256---uint256---) (inherited)
+    - [`_setApprovalForAll`](#ERC1155Upgradeable-_setApprovalForAll-address-address-bool-) (inherited)
+    - [`_beforeTokenTransfer`](#ERC1155Upgradeable-_beforeTokenTransfer-address-address-address-uint256---uint256---bytes-) (inherited)
+    - [`_afterTokenTransfer`](#ERC1155Upgradeable-_afterTokenTransfer-address-address-address-uint256---uint256---bytes-) (inherited)
     - [`__ERC165_init`](#ERC165Upgradeable-__ERC165_init--) (inherited)
     - [`__ERC165_init_unchained`](#ERC165Upgradeable-__ERC165_init_unchained--) (inherited)
     - [`__Context_init`](#ContextUpgradeable-__Context_init--) (inherited)
@@ -111,7 +104,7 @@ Dummy contract test the management of mint rounds with {ERC721RoundsUpgradeable}
     - [`onlyInitializing`](#Initializable-onlyInitializing--) (inherited)
 
 - [Structs](#structs)
-    - [`Round`](#ERC721RoundsUpgradeable-Round) (inherited)
+    - [`Round`](#ERC1155RoundsUpgradeable-Round) (inherited)
 
 
 
@@ -149,36 +142,49 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/ERC1967/ERC1967Upg
 _Inherited from `../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`_.
 
 
-### `RoundSetup(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (inherited) <a name="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-address-uint256-" id="ERC721RoundsUpgradeable-RoundSetup-uint256-uint32-uint64-uint64-address-uint256-"></a>
+### `RoundSetup(uint256 roundId, uint256 tokenId, uint32 supply, uint64 startTime, uint64 duration, uint256 price, address validator)` (inherited) <a name="ERC1155RoundsUpgradeable-RoundSetup-uint256-uint256-uint32-uint64-uint64-uint256-address-" id="ERC1155RoundsUpgradeable-RoundSetup-uint256-uint256-uint32-uint64-uint64-uint256-address-"></a>
 Event emitted when a round is created or edited
 
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `Transfer(address from, address to, uint256 tokenId)` (inherited) <a name="IERC721Upgradeable-Transfer-address-address-uint256-" id="IERC721Upgradeable-Transfer-address-address-uint256-"></a>
+### `TransferSingle(address operator, address from, address to, uint256 id, uint256 value)` (inherited) <a name="IERC1155Upgradeable-TransferSingle-address-address-address-uint256-uint256-" id="IERC1155Upgradeable-TransferSingle-address-address-address-uint256-uint256-"></a>
 
-Emitted when `tokenId` token is transferred from `from` to `to`.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol`_.
+Emitted when `value` tokens of token type `id` are transferred from `from` to `to` by `operator`.
 
 
-### `Approval(address owner, address approved, uint256 tokenId)` (inherited) <a name="IERC721Upgradeable-Approval-address-address-uint256-" id="IERC721Upgradeable-Approval-address-address-uint256-"></a>
-
-Emitted when `owner` enables `approved` to manage the `tokenId` token.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol`_.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol`_.
+### `TransferBatch(address operator, address from, address to, uint256[] ids, uint256[] values)` (inherited) <a name="IERC1155Upgradeable-TransferBatch-address-address-address-uint256---uint256---" id="IERC1155Upgradeable-TransferBatch-address-address-address-uint256---uint256---"></a>
+
+Equivalent to multiple {TransferSingle} events, where `operator`, `from` and `to` are the same for all
+transfers.
 
 
-### `ApprovalForAll(address owner, address operator, bool approved)` (inherited) <a name="IERC721Upgradeable-ApprovalForAll-address-address-bool-" id="IERC721Upgradeable-ApprovalForAll-address-address-bool-"></a>
-
-Emitted when `owner` enables or disables (`approved`) `operator` to manage all of its assets.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol`_.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/IERC721Upgradeable.sol`_.
+### `ApprovalForAll(address account, address operator, bool approved)` (inherited) <a name="IERC1155Upgradeable-ApprovalForAll-address-address-bool-" id="IERC1155Upgradeable-ApprovalForAll-address-address-bool-"></a>
+
+Emitted when `account` grants or revokes permission to `operator` to transfer their tokens, according to
+`approved`.
+
+
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol`_.
+
+
+### `URI(string value, uint256 id)` (inherited) <a name="IERC1155Upgradeable-URI-string-uint256-" id="IERC1155Upgradeable-URI-string-uint256-"></a>
+
+Emitted when the URI for token type `id` changes to `value`, if it is a non-programmatic URI.
+If an {URI} event was emitted for `id`, the standard
+https://eips.ethereum.org/EIPS/eip-1155#metadata-extensions[guarantees] that `value` will equal the value
+returned by {IERC1155MetadataURI-uri}.
+
+
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/IERC1155Upgradeable.sol`_.
 
 
 ### `Initialized(uint8 version)` (inherited) <a name="Initializable-Initialized-uint8-" id="Initializable-Initialized-uint8-"></a>
@@ -192,7 +198,7 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/utils/Initializabl
 
 ## PUBLIC FUNCTIONS
 
-### `constructor()` (public) <a name="DummyERC721RoundsUpgradeable-constructor--" id="DummyERC721RoundsUpgradeable-constructor--"></a>
+### `constructor()` (public) <a name="DummyERC1155RoundsUpgradeable-constructor--" id="DummyERC1155RoundsUpgradeable-constructor--"></a>
 CONSTRUCTOR
 
 
@@ -201,14 +207,14 @@ CONSTRUCTOR
 
 
 
-### `initialize()` (public) <a name="DummyERC721RoundsUpgradeable-initialize--" id="DummyERC721RoundsUpgradeable-initialize--"></a>
+### `initialize()` (public) <a name="DummyERC1155RoundsUpgradeable-initialize--" id="DummyERC1155RoundsUpgradeable-initialize--"></a>
 Initialize the contract
 
 
 
 
 
-### `mint(uint256 roundId, uint256 amount)` (external) <a name="DummyERC721RoundsUpgradeable-mint-uint256-uint256-" id="DummyERC721RoundsUpgradeable-mint-uint256-uint256-"></a>
+### `mint(uint256 roundId, uint256 amount)` (external) <a name="DummyERC1155RoundsUpgradeable-mint-uint256-uint256-" id="DummyERC1155RoundsUpgradeable-mint-uint256-uint256-"></a>
 Mint the `amount` of tokens in a public round.
 
 
@@ -226,7 +232,7 @@ Parameters:
 
 
 
-### `privateMint(uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (external) <a name="DummyERC721RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-" id="DummyERC721RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-"></a>
+### `privateMint(uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (external) <a name="DummyERC1155RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-" id="DummyERC1155RoundsUpgradeable-privateMint-uint256-uint256-uint256-uint256-bytes-"></a>
 Mint the `amount` of tokens with the signature of the round validator.
 
 
@@ -249,7 +255,7 @@ Parameters:
 
 
 
-### `setupRound(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (external) <a name="DummyERC721RoundsUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-" id="DummyERC721RoundsUpgradeable-setupRound-uint256-uint32-uint64-uint64-address-uint256-"></a>
+### `setupRound(uint256 roundId, uint256 tokenId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (external) <a name="DummyERC1155RoundsUpgradeable-setupRound-uint256-uint256-uint32-uint64-uint64-address-uint256-" id="DummyERC1155RoundsUpgradeable-setupRound-uint256-uint256-uint32-uint64-uint64-address-uint256-"></a>
 
 Create or edit a round
 
@@ -262,6 +268,8 @@ Requirements:
 
 Parameters:
 - `roundId`: The round identifier
+
+- `tokenId`: The token index
 
 - `supply`: Number of tokens that can be minted in this round. Can be 0 for no supply control.
 
@@ -336,23 +344,26 @@ Can only be called by the current owner.
 _Inherited from `../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`_.
 
 
-### `totalSupply() → uint256` (public) (inherited)<a name="ERC721RoundsUpgradeable-totalSupply--" id="ERC721RoundsUpgradeable-totalSupply--"></a>
-Returns the total amount of tokens stored by the contract.
+### `totalSupply(uint256 tokenId) → uint256` (public) (inherited)<a name="ERC1155RoundsUpgradeable-totalSupply-uint256-" id="ERC1155RoundsUpgradeable-totalSupply-uint256-"></a>
+Returns the total amount of tokens stored by the contract, by tokenId.
 
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+Parameters:
+- `tokenId`: The token identifier
+
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `totalMintedBy(address wallet, uint256 roundId) → uint256` (public) (inherited)<a name="ERC721RoundsUpgradeable-totalMintedBy-address-uint256-" id="ERC721RoundsUpgradeable-totalMintedBy-address-uint256-"></a>
+### `totalMintedBy(address wallet, uint256 roundId) → uint256` (public) (inherited)<a name="ERC1155RoundsUpgradeable-totalMintedBy-address-uint256-" id="ERC1155RoundsUpgradeable-totalMintedBy-address-uint256-"></a>
 Returns the total amount of tokens minted by `wallet` for `roundId`.
 
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `allRounds() → struct ERC721RoundsUpgradeable.Round[]` (public) (inherited)<a name="ERC721RoundsUpgradeable-allRounds--" id="ERC721RoundsUpgradeable-allRounds--"></a>
+### `allRounds() → struct ERC1155RoundsUpgradeable.Round[]` (public) (inherited)<a name="ERC1155RoundsUpgradeable-allRounds--" id="ERC1155RoundsUpgradeable-allRounds--"></a>
 Returns the array of all rounds stored in the contract.
 
 
@@ -361,116 +372,85 @@ Function for web3 first, this one is not recommended for a call
      from another smart contract (can be expensive in gas).
 
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `supportsInterface(bytes4 interfaceId) → bool` (public) (inherited)<a name="ERC721Upgradeable-supportsInterface-bytes4-" id="ERC721Upgradeable-supportsInterface-bytes4-"></a>
+### `supportsInterface(bytes4 interfaceId) → bool` (public) (inherited)<a name="ERC1155Upgradeable-supportsInterface-bytes4-" id="ERC1155Upgradeable-supportsInterface-bytes4-"></a>
 
 See {IERC165-supportsInterface}.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `balanceOf(address owner) → uint256` (public) (inherited)<a name="ERC721Upgradeable-balanceOf-address-" id="ERC721Upgradeable-balanceOf-address-"></a>
+### `uri(uint256) → string` (public) (inherited)<a name="ERC1155Upgradeable-uri-uint256-" id="ERC1155Upgradeable-uri-uint256-"></a>
 
-See {IERC721-balanceOf}.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `ownerOf(uint256 tokenId) → address` (public) (inherited)<a name="ERC721Upgradeable-ownerOf-uint256-" id="ERC721Upgradeable-ownerOf-uint256-"></a>
-
-See {IERC721-ownerOf}.
+See {IERC1155MetadataURI-uri}.
+This implementation returns the same URI for *all* token types. It relies
+on the token type ID substitution mechanism
+https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP].
+Clients calling this function must replace the `\{id\}` substring with the
+actual token type ID.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `name() → string` (public) (inherited)<a name="ERC721Upgradeable-name--" id="ERC721Upgradeable-name--"></a>
+### `balanceOf(address account, uint256 id) → uint256` (public) (inherited)<a name="ERC1155Upgradeable-balanceOf-address-uint256-" id="ERC1155Upgradeable-balanceOf-address-uint256-"></a>
 
-See {IERC721Metadata-name}.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `symbol() → string` (public) (inherited)<a name="ERC721Upgradeable-symbol--" id="ERC721Upgradeable-symbol--"></a>
-
-See {IERC721Metadata-symbol}.
+See {IERC1155-balanceOf}.
+Requirements:
+- `account` cannot be the zero address.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `tokenURI(uint256 tokenId) → string` (public) (inherited)<a name="ERC721Upgradeable-tokenURI-uint256-" id="ERC721Upgradeable-tokenURI-uint256-"></a>
+### `balanceOfBatch(address[] accounts, uint256[] ids) → uint256[]` (public) (inherited)<a name="ERC1155Upgradeable-balanceOfBatch-address---uint256---" id="ERC1155Upgradeable-balanceOfBatch-address---uint256---"></a>
 
-See {IERC721Metadata-tokenURI}.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `approve(address to, uint256 tokenId)` (public) (inherited)<a name="ERC721Upgradeable-approve-address-uint256-" id="ERC721Upgradeable-approve-address-uint256-"></a>
-
-See {IERC721-approve}.
+See {IERC1155-balanceOfBatch}.
+Requirements:
+- `accounts` and `ids` must have the same length.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `getApproved(uint256 tokenId) → address` (public) (inherited)<a name="ERC721Upgradeable-getApproved-uint256-" id="ERC721Upgradeable-getApproved-uint256-"></a>
+### `setApprovalForAll(address operator, bool approved)` (public) (inherited)<a name="ERC1155Upgradeable-setApprovalForAll-address-bool-" id="ERC1155Upgradeable-setApprovalForAll-address-bool-"></a>
 
-See {IERC721-getApproved}.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+See {IERC1155-setApprovalForAll}.
 
 
-### `setApprovalForAll(address operator, bool approved)` (public) (inherited)<a name="ERC721Upgradeable-setApprovalForAll-address-bool-" id="ERC721Upgradeable-setApprovalForAll-address-bool-"></a>
-
-See {IERC721-setApprovalForAll}.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+### `isApprovedForAll(address account, address operator) → bool` (public) (inherited)<a name="ERC1155Upgradeable-isApprovedForAll-address-address-" id="ERC1155Upgradeable-isApprovedForAll-address-address-"></a>
+
+See {IERC1155-isApprovedForAll}.
 
 
-### `isApprovedForAll(address owner, address operator) → bool` (public) (inherited)<a name="ERC721Upgradeable-isApprovedForAll-address-address-" id="ERC721Upgradeable-isApprovedForAll-address-address-"></a>
-
-See {IERC721-isApprovedForAll}.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+### `safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes data)` (public) (inherited)<a name="ERC1155Upgradeable-safeTransferFrom-address-address-uint256-uint256-bytes-" id="ERC1155Upgradeable-safeTransferFrom-address-address-uint256-uint256-bytes-"></a>
+
+See {IERC1155-safeTransferFrom}.
 
 
-### `transferFrom(address from, address to, uint256 tokenId)` (public) (inherited)<a name="ERC721Upgradeable-transferFrom-address-address-uint256-" id="ERC721Upgradeable-transferFrom-address-address-uint256-"></a>
-
-See {IERC721-transferFrom}.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+### `safeBatchTransferFrom(address from, address to, uint256[] ids, uint256[] amounts, bytes data)` (public) (inherited)<a name="ERC1155Upgradeable-safeBatchTransferFrom-address-address-uint256---uint256---bytes-" id="ERC1155Upgradeable-safeBatchTransferFrom-address-address-uint256---uint256---bytes-"></a>
+
+See {IERC1155-safeBatchTransferFrom}.
 
 
-### `safeTransferFrom(address from, address to, uint256 tokenId)` (public) (inherited)<a name="ERC721Upgradeable-safeTransferFrom-address-address-uint256-" id="ERC721Upgradeable-safeTransferFrom-address-address-uint256-"></a>
-
-See {IERC721-safeTransferFrom}.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `safeTransferFrom(address from, address to, uint256 tokenId, bytes data)` (public) (inherited)<a name="ERC721Upgradeable-safeTransferFrom-address-address-uint256-bytes-" id="ERC721Upgradeable-safeTransferFrom-address-address-uint256-bytes-"></a>
-
-See {IERC721-safeTransferFrom}.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
 ## INTERNAL FUNCTIONS
 
-### `_beforeMint(address to, uint256 amount)` (internal)  <a name="DummyERC721RoundsUpgradeable-_beforeMint-address-uint256-" id="DummyERC721RoundsUpgradeable-_beforeMint-address-uint256-"></a>
+### `_beforeMint(address to, uint256 tokenId, uint256 amount)` (internal)  <a name="DummyERC1155RoundsUpgradeable-_beforeMint-address-uint256-uint256-" id="DummyERC1155RoundsUpgradeable-_beforeMint-address-uint256-uint256-"></a>
 Check the max supply before the mint
 
 
@@ -483,7 +463,7 @@ Parameters:
 
 
 
-### `_authorizeUpgrade(address newImplementation)` (internal)  <a name="DummyERC721RoundsUpgradeable-_authorizeUpgrade-address-" id="DummyERC721RoundsUpgradeable-_authorizeUpgrade-address-"></a>
+### `_authorizeUpgrade(address newImplementation)` (internal)  <a name="DummyERC1155RoundsUpgradeable-_authorizeUpgrade-address-" id="DummyERC1155RoundsUpgradeable-_authorizeUpgrade-address-"></a>
 
 
 
@@ -625,7 +605,23 @@ Internal function without access restriction.
 _Inherited from `../@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol`_.
 
 
-### `_publicRoundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-"></a>
+### `__ERC1155Rounds_init()` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-__ERC1155Rounds_init--" id="ERC1155RoundsUpgradeable-__ERC1155Rounds_init--"></a>
+
+See {_setURI}.
+
+
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
+
+
+### `__ERC1155Rounds_init_unchained()` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-__ERC1155Rounds_init_unchained--" id="ERC1155RoundsUpgradeable-__ERC1155Rounds_init_unchained--"></a>
+
+
+
+
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
+
+
+### `_publicRoundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_publicRoundMint-address-uint256-uint256-"></a>
 
 Mint the `amount` of tokens in a round without validator.
 Call {ERC721RoundsUpgradeable-_roundMint}.
@@ -638,14 +634,12 @@ Requirements:
 Parameters:
 - `to`: The address who want to mint
 
-- `roundId`: The mint round index
-
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_privateRoundMint(address to, uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-" id="ERC721RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-"></a>
+### `_privateRoundMint(address to, uint256 roundId, uint256 amount, uint256 maxMint, uint256 payloadExpiration, bytes sig)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-" id="ERC1155RoundsUpgradeable-_privateRoundMint-address-uint256-uint256-uint256-uint256-bytes-"></a>
 
 Mint the `amount` of tokens with the signature of the round validator.
 
@@ -671,10 +665,10 @@ Parameters:
 
 - `sig`: The EC signature generated by the wave validator
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_setupRound(uint256 roundId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-" id="ERC721RoundsUpgradeable-_setupRound-uint256-uint32-uint64-uint64-address-uint256-"></a>
+### `_setupRound(uint256 roundId, uint256 tokenId, uint32 supply, uint64 startTime, uint64 duration, address validator, uint256 price)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_setupRound-uint256-uint256-uint32-uint64-uint64-address-uint256-" id="ERC1155RoundsUpgradeable-_setupRound-uint256-uint256-uint32-uint64-uint64-address-uint256-"></a>
 
 Create or edit a round
 
@@ -687,6 +681,8 @@ Requirements:
 Parameters:
 - `roundId`: The round identifier
 
+- `tokenId`: The token identifier
+
 - `supply`: Number of tokens that can be minted in this round. Can be 0 for no supply control.
 
 - `startTime`: The start date of the round in seconds
@@ -697,10 +693,10 @@ Parameters:
 
 - `price`: The price of the round in ETH (can be 0)
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_roundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-"></a>
+### `_roundMint(address to, uint256 roundId, uint256 amount)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_roundMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_roundMint-address-uint256-uint256-"></a>
 
 Safely mint the `amount` of tokens for `to` address in accordance with round configuration
 
@@ -719,10 +715,10 @@ Parameters:
 
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_mintWithAmount(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-" id="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-"></a>
+### `_mintWithAmount(address to, uint256 tokenId, uint256 amount)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_mintWithAmount-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_mintWithAmount-address-uint256-uint256-"></a>
 
 Mint the `amount` of tokens for `to`
 
@@ -737,27 +733,14 @@ Increase `_totalMinted`
 Parameters:
 - `to`: The wallet to transfer new tokens
 
+- `tokenId`: The token identifier
+
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_getNextTokenId(address to, uint256 totalMinted) → uint256` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-" id="ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-"></a>
-
-Gives the identifier for the next minted token (can be override)
-By default, simply increments the last token Id
-
-
-
-Parameters:
-- `to`: The wallet who want to mint (to use in a random function or other)
-
-- `totalMinted`: Updated total minted
-
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
-
-
-### `_checkSignature(uint256 payloadExpiration, bytes data, bytes sig, address signer)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-" id="ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-"></a>
+### `_checkSignature(uint256 payloadExpiration, bytes data, bytes sig, address signer)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-" id="ERC1155RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-"></a>
 Reverts if the data does not correspond to the signature, to the correct signer or if it has expired
 
 
@@ -777,10 +760,10 @@ Parameters:
 
 - `signer`: The address that is supposed to be the signatory
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_beforeRoundMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-" id="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-"></a>
+### `_beforeRoundMint(address to, uint256 tokenId, uint256 amount)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-"></a>
 
 Hook that is called before any mint in a round
 
@@ -794,12 +777,14 @@ Calling conditions:
 Parameters:
 - `to`: The wallet to transfer new tokens
 
+- `tokenId`: The token identifier
+
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_afterRoundMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-" id="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-"></a>
+### `_afterRoundMint(address to, uint256 tokenId, uint256 amount)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_afterRoundMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_afterRoundMint-address-uint256-uint256-"></a>
 
 Hook that is called after any mint in a round
 
@@ -807,12 +792,14 @@ Hook that is called after any mint in a round
 Parameters:
 - `to`: The wallet to transfer new tokens
 
+- `tokenId`: The token identifier
+
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `_afterMint(address to, uint256 amount)` (internal) (inherited) <a name="ERC721RoundsUpgradeable-_afterMint-address-uint256-" id="ERC721RoundsUpgradeable-_afterMint-address-uint256-"></a>
+### `_afterMint(address to, uint256 tokenId, uint256 amount)` (internal) (inherited) <a name="ERC1155RoundsUpgradeable-_afterMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_afterMint-address-uint256-uint256-"></a>
 
 Hook that is called after any mint
 
@@ -820,188 +807,173 @@ Hook that is called after any mint
 Parameters:
 - `to`: The wallet to transfer new tokens
 
+- `tokenId`: The token identifier
+
 - `amount`: The number of tokens to mint
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
-### `__ERC721_init(string name_, string symbol_)` (internal) (inherited) <a name="ERC721Upgradeable-__ERC721_init-string-string-" id="ERC721Upgradeable-__ERC721_init-string-string-"></a>
+### `__ERC1155_init(string uri_)` (internal) (inherited) <a name="ERC1155Upgradeable-__ERC1155_init-string-" id="ERC1155Upgradeable-__ERC1155_init-string-"></a>
 
-Initializes the contract by setting a `name` and a `symbol` to the token collection.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+See {_setURI}.
 
 
-### `__ERC721_init_unchained(string name_, string symbol_)` (internal) (inherited) <a name="ERC721Upgradeable-__ERC721_init_unchained-string-string-" id="ERC721Upgradeable-__ERC721_init_unchained-string-string-"></a>
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
+
+
+### `__ERC1155_init_unchained(string uri_)` (internal) (inherited) <a name="ERC1155Upgradeable-__ERC1155_init_unchained-string-" id="ERC1155Upgradeable-__ERC1155_init_unchained-string-"></a>
 
 
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `_baseURI() → string` (internal) (inherited) <a name="ERC721Upgradeable-_baseURI--" id="ERC721Upgradeable-_baseURI--"></a>
+### `_safeTransferFrom(address from, address to, uint256 id, uint256 amount, bytes data)` (internal) (inherited) <a name="ERC1155Upgradeable-_safeTransferFrom-address-address-uint256-uint256-bytes-" id="ERC1155Upgradeable-_safeTransferFrom-address-address-uint256-uint256-bytes-"></a>
 
-Base URI for computing {tokenURI}. If set, the resulting URI for each
-token will be the concatenation of the `baseURI` and the `tokenId`. Empty
-by default, can be overridden in child contracts.
+Transfers `amount` tokens of token type `id` from `from` to `to`.
+Emits a {TransferSingle} event.
+Requirements:
+- `to` cannot be the zero address.
+- `from` must have a balance of tokens of type `id` of at least `amount`.
+- If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
+acceptance magic value.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `_safeTransfer(address from, address to, uint256 tokenId, bytes data)` (internal) (inherited) <a name="ERC721Upgradeable-_safeTransfer-address-address-uint256-bytes-" id="ERC721Upgradeable-_safeTransfer-address-address-uint256-bytes-"></a>
+### `_safeBatchTransferFrom(address from, address to, uint256[] ids, uint256[] amounts, bytes data)` (internal) (inherited) <a name="ERC1155Upgradeable-_safeBatchTransferFrom-address-address-uint256---uint256---bytes-" id="ERC1155Upgradeable-_safeBatchTransferFrom-address-address-uint256---uint256---bytes-"></a>
 
-Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-are aware of the ERC721 protocol to prevent tokens from being forever locked.
-`data` is additional data, it has no specified format and it is sent in call to `to`.
-This internal function is equivalent to {safeTransferFrom}, and can be used to e.g.
-implement alternative mechanisms to perform token transfer, such as signature-based.
+xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {_safeTransferFrom}.
+Emits a {TransferBatch} event.
+Requirements:
+- If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the
+acceptance magic value.
+
+
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
+
+
+### `_setURI(string newuri)` (internal) (inherited) <a name="ERC1155Upgradeable-_setURI-string-" id="ERC1155Upgradeable-_setURI-string-"></a>
+
+Sets a new URI for all token types, by relying on the token type ID
+substitution mechanism
+https://eips.ethereum.org/EIPS/eip-1155#metadata[defined in the EIP].
+By this mechanism, any occurrence of the `\{id\}` substring in either the
+URI or any of the amounts in the JSON file at said URI will be replaced by
+clients with the token type ID.
+For example, the `https://token-cdn-domain/\{id\}.json` URI would be
+interpreted by clients as
+`https://token-cdn-domain/000000000000000000000000000000000000000000000000000000000004cce0.json`
+for token type ID 0x4cce0.
+See {uri}.
+Because these URIs cannot be meaningfully represented by the {URI} event,
+this function emits no events.
+
+
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
+
+
+### `_mint(address to, uint256 id, uint256 amount, bytes data)` (internal) (inherited) <a name="ERC1155Upgradeable-_mint-address-uint256-uint256-bytes-" id="ERC1155Upgradeable-_mint-address-uint256-uint256-bytes-"></a>
+
+Creates `amount` tokens of token type `id`, and assigns them to `to`.
+Emits a {TransferSingle} event.
+Requirements:
+- `to` cannot be the zero address.
+- If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155Received} and return the
+acceptance magic value.
+
+
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
+
+
+### `_mintBatch(address to, uint256[] ids, uint256[] amounts, bytes data)` (internal) (inherited) <a name="ERC1155Upgradeable-_mintBatch-address-uint256---uint256---bytes-" id="ERC1155Upgradeable-_mintBatch-address-uint256---uint256---bytes-"></a>
+
+xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {_mint}.
+Emits a {TransferBatch} event.
+Requirements:
+- `ids` and `amounts` must have the same length.
+- If `to` refers to a smart contract, it must implement {IERC1155Receiver-onERC1155BatchReceived} and return the
+acceptance magic value.
+
+
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
+
+
+### `_burn(address from, uint256 id, uint256 amount)` (internal) (inherited) <a name="ERC1155Upgradeable-_burn-address-uint256-uint256-" id="ERC1155Upgradeable-_burn-address-uint256-uint256-"></a>
+
+Destroys `amount` tokens of token type `id` from `from`
+Emits a {TransferSingle} event.
 Requirements:
 - `from` cannot be the zero address.
-- `to` cannot be the zero address.
-- `tokenId` token must exist and be owned by `from`.
-- If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
-Emits a {Transfer} event.
+- `from` must have at least `amount` tokens of token type `id`.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `_exists(uint256 tokenId) → bool` (internal) (inherited) <a name="ERC721Upgradeable-_exists-uint256-" id="ERC721Upgradeable-_exists-uint256-"></a>
+### `_burnBatch(address from, uint256[] ids, uint256[] amounts)` (internal) (inherited) <a name="ERC1155Upgradeable-_burnBatch-address-uint256---uint256---" id="ERC1155Upgradeable-_burnBatch-address-uint256---uint256---"></a>
 
-Returns whether `tokenId` exists.
-Tokens can be managed by their owner or approved accounts via {approve} or {setApprovalForAll}.
-Tokens start existing when they are minted (`_mint`),
-and stop existing when they are burned (`_burn`).
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_isApprovedOrOwner(address spender, uint256 tokenId) → bool` (internal) (inherited) <a name="ERC721Upgradeable-_isApprovedOrOwner-address-uint256-" id="ERC721Upgradeable-_isApprovedOrOwner-address-uint256-"></a>
-
-Returns whether `spender` is allowed to manage `tokenId`.
+xref:ROOT:erc1155.adoc#batch-operations[Batched] version of {_burn}.
+Emits a {TransferBatch} event.
 Requirements:
-- `tokenId` must exist.
+- `ids` and `amounts` must have the same length.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `_safeMint(address to, uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_safeMint-address-uint256-" id="ERC721Upgradeable-_safeMint-address-uint256-"></a>
-
-Safely mints `tokenId` and transfers it to `to`.
-Requirements:
-- `tokenId` must not exist.
-- If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
-Emits a {Transfer} event.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_safeMint(address to, uint256 tokenId, bytes data)` (internal) (inherited) <a name="ERC721Upgradeable-_safeMint-address-uint256-bytes-" id="ERC721Upgradeable-_safeMint-address-uint256-bytes-"></a>
-
-Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
-forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_mint(address to, uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_mint-address-uint256-" id="ERC721Upgradeable-_mint-address-uint256-"></a>
-
-Mints `tokenId` and transfers it to `to`.
-WARNING: Usage of this method is discouraged, use {_safeMint} whenever possible
-Requirements:
-- `tokenId` must not exist.
-- `to` cannot be the zero address.
-Emits a {Transfer} event.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_burn(uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_burn-uint256-" id="ERC721Upgradeable-_burn-uint256-"></a>
-
-Destroys `tokenId`.
-The approval is cleared when the token is burned.
-Requirements:
-- `tokenId` must exist.
-Emits a {Transfer} event.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_transfer(address from, address to, uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_transfer-address-address-uint256-" id="ERC721Upgradeable-_transfer-address-address-uint256-"></a>
-
-Transfers `tokenId` from `from` to `to`.
- As opposed to {transferFrom}, this imposes no restrictions on msg.sender.
-Requirements:
-- `to` cannot be the zero address.
-- `tokenId` token must be owned by `from`.
-Emits a {Transfer} event.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_approve(address to, uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_approve-address-uint256-" id="ERC721Upgradeable-_approve-address-uint256-"></a>
-
-Approve `to` to operate on `tokenId`
-Emits an {Approval} event.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_setApprovalForAll(address owner, address operator, bool approved)` (internal) (inherited) <a name="ERC721Upgradeable-_setApprovalForAll-address-address-bool-" id="ERC721Upgradeable-_setApprovalForAll-address-address-bool-"></a>
+### `_setApprovalForAll(address owner, address operator, bool approved)` (internal) (inherited) <a name="ERC1155Upgradeable-_setApprovalForAll-address-address-bool-" id="ERC1155Upgradeable-_setApprovalForAll-address-address-bool-"></a>
 
 Approve `operator` to operate on all of `owner` tokens
 Emits an {ApprovalForAll} event.
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `_requireMinted(uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_requireMinted-uint256-" id="ERC721Upgradeable-_requireMinted-uint256-"></a>
-
-Reverts if the `tokenId` has not been minted yet.
-
-
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
-
-
-### `_beforeTokenTransfer(address from, address to, uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_beforeTokenTransfer-address-address-uint256-" id="ERC721Upgradeable-_beforeTokenTransfer-address-address-uint256-"></a>
+### `_beforeTokenTransfer(address operator, address from, address to, uint256[] ids, uint256[] amounts, bytes data)` (internal) (inherited) <a name="ERC1155Upgradeable-_beforeTokenTransfer-address-address-address-uint256---uint256---bytes-" id="ERC1155Upgradeable-_beforeTokenTransfer-address-address-address-uint256---uint256---bytes-"></a>
 
 Hook that is called before any token transfer. This includes minting
-and burning.
-Calling conditions:
-- When `from` and `to` are both non-zero, ``from``'s `tokenId` will be
-transferred to `to`.
-- When `from` is zero, `tokenId` will be minted for `to`.
-- When `to` is zero, ``from``'s `tokenId` will be burned.
+and burning, as well as batched variants.
+The same hook is called on both single and batched variants. For single
+transfers, the length of the `ids` and `amounts` arrays will be 1.
+Calling conditions (for each `id` and `amount` pair):
+- When `from` and `to` are both non-zero, `amount` of ``from``'s tokens
+of token type `id` will be  transferred to `to`.
+- When `from` is zero, `amount` tokens of token type `id` will be minted
+for `to`.
+- when `to` is zero, `amount` of ``from``'s tokens of token type `id`
+will be burned.
 - `from` and `to` are never both zero.
+- `ids` and `amounts` have the same, non-zero length.
 To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
-### `_afterTokenTransfer(address from, address to, uint256 tokenId)` (internal) (inherited) <a name="ERC721Upgradeable-_afterTokenTransfer-address-address-uint256-" id="ERC721Upgradeable-_afterTokenTransfer-address-address-uint256-"></a>
+### `_afterTokenTransfer(address operator, address from, address to, uint256[] ids, uint256[] amounts, bytes data)` (internal) (inherited) <a name="ERC1155Upgradeable-_afterTokenTransfer-address-address-address-uint256---uint256---bytes-" id="ERC1155Upgradeable-_afterTokenTransfer-address-address-address-uint256---uint256---bytes-"></a>
 
-Hook that is called after any transfer of tokens. This includes
-minting and burning.
-Calling conditions:
-- when `from` and `to` are both non-zero.
+Hook that is called after any token transfer. This includes minting
+and burning, as well as batched variants.
+The same hook is called on both single and batched variants. For single
+transfers, the length of the `id` and `amount` arrays will be 1.
+Calling conditions (for each `id` and `amount` pair):
+- When `from` and `to` are both non-zero, `amount` of ``from``'s tokens
+of token type `id` will be  transferred to `to`.
+- When `from` is zero, `amount` tokens of token type `id` will be minted
+for `to`.
+- when `to` is zero, `amount` of ``from``'s tokens of token type `id`
+will be burned.
 - `from` and `to` are never both zero.
+- `ids` and `amounts` have the same, non-zero length.
 To learn more about hooks, head to xref:ROOT:extending-contracts.adoc#using-hooks[Using Hooks].
 
 
-_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC721/ERC721Upgradeable.sol`_.
+_Inherited from `../@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol`_.
 
 
 ### `__ERC165_init()` (internal) (inherited) <a name="ERC165Upgradeable-__ERC165_init--" id="ERC165Upgradeable-__ERC165_init--"></a>
@@ -1136,15 +1108,16 @@ _Inherited from `../@openzeppelin/contracts-upgradeable/proxy/utils/Initializabl
 
 ## STRUCTS
 
-### `Round` (inherited) <a name="ERC721RoundsUpgradeable-Round" id="ERC721RoundsUpgradeable-Round"></a>
+### `Round` (inherited) <a name="ERC1155RoundsUpgradeable-Round" id="ERC1155RoundsUpgradeable-Round"></a>
 - uint256 id
+- uint256 tokenId
 - uint32 supply
 - uint64 startTime
 - uint64 duration
-- address validator
 - uint256 price
 - uint256 totalMinted
+- address validator
 
-_Inherited from `ERC721Upgradeable/ERC721RoundsUpgradeable.sol`_.
+_Inherited from `ERC1155Upgradeable/ERC1155RoundsUpgradeable.sol`_.
 
 
