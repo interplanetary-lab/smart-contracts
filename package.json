@@ -1,7 +1,7 @@
 {
   "name": "@interplanetary-lab/smart-contracts",
   "description": "Useful toolbox for Interplanetary lab's smart contracts.",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "homepage": "https://github.com/interplanetary-lab/smart-contracts",
   "repository": {
     "type": "git",
@@ -23,17 +23,20 @@
   },
   "devDependencies": {
     "@openzeppelin/truffle-upgrades": "^1.16.0",
+    "@typechain/ethers-v5": "^10.2.0",
     "cli-progress": "^3.11.2",
     "ganache-cli": "^6.12.2",
     "semantic-release": "^19.0.5",
     "solc-0.8": "npm:solc@^0.8.17",
-    "solidity-docgen": "^0.5.17"
+    "solidity-docgen": "^0.5.17",
+    "typechain": "^8.1.1"
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.7.3",
     "@openzeppelin/contracts-upgradeable": "^4.7.3",
     "@openzeppelin/test-helpers": "^0.5.16",
     "dotenv": "^16.0.2",
+    "ethers": "5.7.2",
     "web3-utils": "^1.8.0"
   }
 }

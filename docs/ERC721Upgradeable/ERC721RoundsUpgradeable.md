@@ -40,10 +40,10 @@ Contract allowing the management of mint rounds for {ERC721Upgradeable}
     - [`_mintWithAmount`](#ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-) 
     - [`_getNextTokenId`](#ERC721RoundsUpgradeable-_getNextTokenId-address-uint256-) 
     - [`_checkSignature`](#ERC721RoundsUpgradeable-_checkSignature-uint256-bytes-bytes-address-) 
-    - [`_beforeRoundMint`](#ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-) 
+    - [`_beforeRoundMint`](#ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-) 
     - [`_beforeMint`](#ERC721RoundsUpgradeable-_beforeMint-address-uint256-) 
-    - [`_afterRoundMint`](#ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-) 
-    - [`_afterMint`](#ERC721RoundsUpgradeable-_afterMint-address-uint256-) 
+    - [`_afterRoundMint`](#ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-uint256---) 
+    - [`_afterMint`](#ERC721RoundsUpgradeable-_afterMint-address-uint256---) 
     - [`__ERC721_init`](#ERC721Upgradeable-__ERC721_init-string-string-) (inherited)
     - [`__ERC721_init_unchained`](#ERC721Upgradeable-__ERC721_init_unchained-string-string-) (inherited)
     - [`_baseURI`](#ERC721Upgradeable-_baseURI--) (inherited)
@@ -327,7 +327,7 @@ Parameters:
 
 
 
-### `_roundMint(address to, uint256 roundId, uint256 amount)` (internal)  <a name="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-"></a>
+### `_roundMint(address to, uint256 roundId, uint256 amount) → uint256[]` (internal)  <a name="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_roundMint-address-uint256-uint256-"></a>
 
 Safely mint the `amount` of tokens for `to` address in accordance with round configuration
 
@@ -348,7 +348,9 @@ Parameters:
 
 
 
-### `_mintWithAmount(address to, uint256 amount)` (internal)  <a name="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-" id="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-"></a>
+
+
+### `_mintWithAmount(address to, uint256 amount) → uint256[]` (internal)  <a name="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-" id="ERC721RoundsUpgradeable-_mintWithAmount-address-uint256-"></a>
 
 Mint the `amount` of tokens for `to`
 
@@ -364,6 +366,8 @@ Parameters:
 - `to`: The wallet to transfer new tokens
 
 - `amount`: The number of tokens to mint
+
+
 
 
 
@@ -403,7 +407,7 @@ Parameters:
 
 
 
-### `_beforeRoundMint(address to, uint256 amount)` (internal)  <a name="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-" id="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-"></a>
+### `_beforeRoundMint(address to, uint256 roundId, uint256 amount)` (internal)  <a name="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-" id="ERC721RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-"></a>
 
 Hook that is called before any mint in a round
 
@@ -416,6 +420,8 @@ Calling conditions:
 
 Parameters:
 - `to`: The wallet to transfer new tokens
+
+- `roundId`: The mint round index
 
 - `amount`: The number of tokens to mint
 
@@ -437,7 +443,7 @@ Parameters:
 
 
 
-### `_afterRoundMint(address to, uint256 amount)` (internal)  <a name="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-" id="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-"></a>
+### `_afterRoundMint(address to, uint256 roundId, uint256[] tokenIds)` (internal)  <a name="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-uint256---" id="ERC721RoundsUpgradeable-_afterRoundMint-address-uint256-uint256---"></a>
 
 Hook that is called after any mint in a round
 
@@ -445,11 +451,13 @@ Hook that is called after any mint in a round
 Parameters:
 - `to`: The wallet to transfer new tokens
 
-- `amount`: The number of tokens to mint
+- `roundId`: The mint round index
+
+- `tokenIds`: Array of all minted ids
 
 
 
-### `_afterMint(address to, uint256 amount)` (internal)  <a name="ERC721RoundsUpgradeable-_afterMint-address-uint256-" id="ERC721RoundsUpgradeable-_afterMint-address-uint256-"></a>
+### `_afterMint(address to, uint256[] tokenIds)` (internal)  <a name="ERC721RoundsUpgradeable-_afterMint-address-uint256---" id="ERC721RoundsUpgradeable-_afterMint-address-uint256---"></a>
 
 Hook that is called after any mint
 
@@ -457,7 +465,7 @@ Hook that is called after any mint
 Parameters:
 - `to`: The wallet to transfer new tokens
 
-- `amount`: The number of tokens to mint
+- `tokenIds`: Array of all minted ids
 
 
 

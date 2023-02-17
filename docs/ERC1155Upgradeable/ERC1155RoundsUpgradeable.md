@@ -383,7 +383,7 @@ Parameters:
 
 
 
-### `_beforeRoundMint(address to, uint256 tokenId, uint256 amount)` (internal)  <a name="ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-"></a>
+### `_beforeRoundMint(address to, uint256 roundId, uint256 amount)` (internal)  <a name="ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-" id="ERC1155RoundsUpgradeable-_beforeRoundMint-address-uint256-uint256-"></a>
 
 Hook that is called before any mint in a round
 
@@ -397,7 +397,7 @@ Calling conditions:
 Parameters:
 - `to`: The wallet to transfer new tokens
 
-- `tokenId`: The token identifier
+- `roundId`: The mint round index
 
 - `amount`: The number of tokens to mint
 

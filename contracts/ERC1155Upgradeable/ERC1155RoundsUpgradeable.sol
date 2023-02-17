@@ -382,12 +382,12 @@ contract ERC1155RoundsUpgradeable is ERC1155Upgradeable {
      * - when round supply not exceeded.
      *
      * @param to The wallet to transfer new tokens
-     * @param tokenId The token identifier
+     * @param roundId The mint round index
      * @param amount The number of tokens to mint
      */
     function _beforeRoundMint(
         address to,
-        uint256 tokenId,
+        uint256 roundId,
         uint256 amount
     ) internal virtual {}
 

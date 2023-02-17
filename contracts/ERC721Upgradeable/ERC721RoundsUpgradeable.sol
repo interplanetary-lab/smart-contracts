@@ -241,12 +241,14 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
      * @param to The address who want to mint
      * @param roundId The round index in the current wave
      * @param amount The number of tokens to mint
+     *
+     * @return tokenIds Array of all minted ids
      */
     function _roundMint(
         address to,
         uint256 roundId,
         uint256 amount
-    ) internal virtual {
+    ) internal virtual returns (uint256[] memory) {
         Round storage round = rounds[roundId];
 
         // Round active
@@ -268,17 +270,19 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
         );
 
         // For custom conditions or process
-        _beforeRoundMint(to, amount);
+        _beforeRoundMint(to, roundId, amount);
 
         // Safe mint
-        _mintWithAmount(to, amount);
+        uint256[] memory tokenIds = _mintWithAmount(to, amount);
 
         // Increase user total minted
         round.totalMinted += amount;
         _roundsToOwnerTotalMinted[roundId][to] += amount;
 
         // For custom process
-        _afterRoundMint(to, amount);
+        _afterRoundMint(to, roundId, tokenIds);
+
+        return tokenIds;
     }
 
     /**
@@ -292,22 +296,33 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
      *
      * @param to The wallet to transfer new tokens
      * @param amount The number of tokens to mint
+     *
+     * @return tokenIds Array of all minted ids
      */
-    function _mintWithAmount(address to, uint256 amount) internal virtual {
+    function _mintWithAmount(address to, uint256 amount)
+        internal
+        virtual
+        returns (uint256[] memory)
+    {
         require(amount > 0, "Zero amount");
 
         // For custom conditions or process
         _beforeMint(to, amount);
 
+        uint256[] memory tokenIds = new uint256[](amount);
+
         // Mint
         for (uint256 i = 0; i < amount; i++) {
             uint256 tokenId = _getNextTokenId(to, _totalMinted + i);
             _mint(to, tokenId);
+            tokenIds[i] = tokenId;
         }
         _totalMinted += amount;
 
         // For custom process
-        _afterMint(to, amount);
+        _afterMint(to, tokenIds);
+
+        return tokenIds;
     }
 
     /**
@@ -361,9 +376,14 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
      * - when round supply not exceeded.
      *
      * @param to The wallet to transfer new tokens
+     * @param roundId The mint round index
      * @param amount The number of tokens to mint
      */
-    function _beforeRoundMint(address to, uint256 amount) internal virtual {}
+    function _beforeRoundMint(
+        address to,
+        uint256 roundId,
+        uint256 amount
+    ) internal virtual {}
 
     /**
      * @dev Hook that is called before any mint
@@ -379,16 +399,24 @@ contract ERC721RoundsUpgradeable is ERC721Upgradeable {
     /**
      * @dev Hook that is called after any mint in a round
      * @param to The wallet to transfer new tokens
-     * @param amount The number of tokens to mint
+     * @param roundId The mint round index
+     * @param tokenIds Array of all minted ids
      */
-    function _afterRoundMint(address to, uint256 amount) internal virtual {}
+    function _afterRoundMint(
+        address to,
+        uint256 roundId,
+        uint256[] memory tokenIds
+    ) internal virtual {}
 
     /**
      * @dev Hook that is called after any mint
      * @param to The wallet to transfer new tokens
-     * @param amount The number of tokens to mint
+     * @param tokenIds Array of all minted ids
      */
-    function _afterMint(address to, uint256 amount) internal virtual {}
+    function _afterMint(address to, uint256[] memory tokenIds)
+        internal
+        virtual
+    {}
 
     /**
      * @dev This empty reserved space is put in place to allow future versions to add new
