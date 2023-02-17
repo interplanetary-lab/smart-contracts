@@ -1,7 +1,7 @@
 {
   "name": "@interplanetary-lab/smart-contracts",
   "description": "Useful toolbox for Interplanetary lab's smart contracts.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "homepage": "https://github.com/interplanetary-lab/smart-contracts",
   "repository": {
     "type": "git",
